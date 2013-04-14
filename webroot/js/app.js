@@ -1,7 +1,22 @@
-App = Ember.Application.create();
+InstantWRC = Ember.Application.create();
 
-App.Router.map(function() {
+InstantWRC.Router.map(function() {
 	this.route('rankings');
 	this.route('rally');
 	this.route('stage');
+});
+
+InstantWRC.Store = DS.Store.extend({
+	revision: 11,
+	adapter: DS.RESTAdapter
+});
+
+InstantWRC.Rally = DS.Model.extend({
+	name: DS.attr('string')
+});
+
+InstantWRC.IndexRoute = Ember.Route.extend({
+	model: function(){
+		return InstantWRC.Rally.find();
+	}
 });
