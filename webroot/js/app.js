@@ -17,6 +17,6 @@ InstantWRC.Rally = DS.Model.extend({
 
 InstantWRC.IndexRoute = Ember.Route.extend({
 	model: function(){
-		return InstantWRC.Rally.find();
+		return InstantWRC.Rally.find(1);
 	}
 });

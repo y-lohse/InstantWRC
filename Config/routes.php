@@ -37,6 +37,9 @@
  * how to customize the loading of plugin routes.
  */
 	CakePlugin::routes();
+	
+	Router::mapResources('Rallys');
+	Router::parseExtensions('json');
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
