@@ -17,5 +17,5 @@ config(['$routeProvider', function($routeProvider) {
 		templateUrl: '/index/forecast', 
 		controller: ForecastCtrl
 	}).
-	otherwise({redirectTo: '/ranking'});
+	otherwise({redirectTo: '/rally'});
 }]);
