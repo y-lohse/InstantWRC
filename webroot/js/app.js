@@ -1,13 +1,21 @@
 angular.module('instantwrc', []).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
-	when('/phones', {
-		templateUrl: '/index/phonelist', 
-		controller: PhoneListCtrl
+	when('/ranking', {
+		templateUrl: '/index/ranking', 
+		controller: RankingCtrl
 	}).
-	when('/phones/:phoneId', {
-		templateUrl: '/index/details', 
-		controller: PhoneDetailCtrl
+	when('/rally', {
+		templateUrl: '/index/rally', 
+		controller: RallyCtrl
 	}).
-	otherwise({redirectTo: '/phones'});
+	when('/stage', {
+		templateUrl: '/index/stage', 
+		controller: StageCtrl
+	}).
+	when('/forecast', {
+		templateUrl: '/index/forecast', 
+		controller: ForecastCtrl
+	}).
+	otherwise({redirectTo: '/ranking'});
 }]);
