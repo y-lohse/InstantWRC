@@ -9,7 +9,7 @@ InstantWRC.config(['$routeProvider', function($routeProvider) {
 		templateUrl: '/index/rally', 
 		controller: 'RallyController'
 	}).
-	when('/stage', {
+	when('/stage/:stageId', {
 		templateUrl: '/index/stage', 
 		controller: 'StageController'
 	}).
