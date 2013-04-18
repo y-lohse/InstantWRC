@@ -38,7 +38,7 @@
  */
 	CakePlugin::routes();
 	
-	Router::mapResources('Rally');
+	Router::mapResources(array('Rally', 'Stage'));
 	Router::parseExtensions('json');
 
 /**
