@@ -1,21 +1,21 @@
-var InstantWRC = angular.module('InstantWRC', []).
-config(['$routeProvider', function($routeProvider) {
+var InstantWRC = angular.module('InstantWRC', []);
+InstantWRC.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 	when('/ranking', {
 		templateUrl: '/index/ranking', 
-		controller: RankingCtrl
+		controller: 'RankingController'
 	}).
 	when('/rally', {
 		templateUrl: '/index/rally', 
-		controller: RallyCtrl
+		controller: 'RallyController'
 	}).
 	when('/stage', {
 		templateUrl: '/index/stage', 
-		controller: StageCtrl
+		controller: 'StageController'
 	}).
 	when('/forecast', {
 		templateUrl: '/index/forecast', 
-		controller: ForecastCtrl
+		controller: 'ForecastController'
 	}).
 	otherwise({redirectTo: '/rally'});
 }]);

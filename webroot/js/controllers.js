@@ -1,18 +1,11 @@
-function RankingCtrl($scope, $routeParams) {
-}
+InstantWRC.controller('RankingController', function(){
+});
 
-function RallyCtrl($scope, $http, $routeParams){
-	$http.get('/rally.json').success(function(data){
-		$scope.stages = data;
-	});
-	
-	$scope.addStage = function(){
-		$scope.stages.push({'name':'new', 'distance':'50km'});
-	}
-}
+InstantWRC.controller('RallyController', function($scope, $http){
+});
 
-function StageCtrl($scope, $routeParams) {
-}
+InstantWRC.controller('StageController', function(){
+});
 
-function ForecastCtrl($scope, $routeParams) {
-}
+InstantWRC.controller('ForecastController', function(){
+});
