@@ -32,4 +32,12 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+	protected function fieldsAs($fields){
+		$return = array();
+		foreach ($fields as $field=>$as){
+			array_push($return, $field . ' AS ' . $as);
+		}
+	
+		return $return;
+	}
 }
