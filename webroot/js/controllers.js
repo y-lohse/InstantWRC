@@ -1,13 +1,10 @@
 function RankingCtrl($scope, $routeParams) {
 }
 
-function RallyCtrl($scope, $routeParams){
-	$scope.stages = [
-		{'name':'SS 1',
-		'distance':'18.4km'},
-		{'name':'SS 2',
-		'distance':'24.2km'},
-	];
+function RallyCtrl($scope, $http, $routeParams){
+	$http.get('/rally.json').success(function(data){
+		$scope.stages = data;
+	});
 }
 
 function StageCtrl($scope, $routeParams) {
