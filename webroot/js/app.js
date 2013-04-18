@@ -1,4 +1,4 @@
-angular.module('instantwrc', []).
+var InstantWRC = angular.module('InstantWRC', []).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 	when('/ranking', {

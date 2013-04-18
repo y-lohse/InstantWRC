@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="instantwrc">
+<html ng-app="InstantWRC">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
