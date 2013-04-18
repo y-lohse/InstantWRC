@@ -1,8 +1,11 @@
 <ol>
 	<li ng-repeat="stage in stages">
-		{{stage.name}}
-		<em>
-			{{stage.distance}}
-		</em>
+		<a href="#/stage">
+			{{stage.name}}
+			<em>
+				{{stage.distance}}
+			</em>
+		</a>
 	</li>
 </ol>
+<button ng-click="addStage()">add</button>
