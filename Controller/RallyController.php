@@ -1,6 +1,6 @@
 <?php
 class RallyController extends AppController {
-	public $uses = array('Stage');
+	public $uses = array('Stage', 'Driver');
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
@@ -10,9 +10,12 @@ class RallyController extends AppController {
 	public function view($id){
 		$id = (int)$id;
 		
+		$rawTimes = $this->Driver->getOverALlTimes($id);
 		$times = array();
-		array_push($times, array('driver'=>'S. Loeb', 'time'=>'01:34.5'));
-		array_push($times, array('driver'=>'S. Ogier', 'time'=>'01:36.5'));
+		foreach ($rawTimes as $time){
+			array_push($times, array('driver'=>$time['Driver']['name'],
+									  'time'=>$time['Overall']['time']));
+		}
 		
 		$rawStages = $this->Stage->getSTages($id);
 		$stages= array();
