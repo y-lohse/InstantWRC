@@ -1,5 +1,6 @@
 <?php
 class StageController extends AppController {
+	public $uses = array('Driver');
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
@@ -7,9 +8,13 @@ class StageController extends AppController {
 	}
 	
 	public function view($id){
+		$rawTimes = $this->Driver->getStageTimes($id);
 		$times = array();
-		array_push($times, array('driver'=>'S. Loeb', 'time'=>'00:34.5'));
-		array_push($times, array('driver'=>'S. Ogier', 'time'=>'00:36.5'));
+		
+		foreach ($rawTimes as $time){
+			array_push($times, array('driver'=>$time['Driver']['name'],
+									  'time'=>$time['StageTime']['time']));
+		}
 	
 		$this->set('times', $times);
 		$this->set('_serialize', array('times'));
