@@ -107,3 +107,5 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+define('DATETIME_SQL', 'Y-m-d H:i:s');
