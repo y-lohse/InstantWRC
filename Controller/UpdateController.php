@@ -15,16 +15,30 @@ class UpdateController extends AppController {
 		App::import('Vendor', 'WrcDotCom');
 		$wrcInterface = new WrcDotCom($running['Rally']['url']);
 		
-		debug($setup);
+		//setup du rally
 		if (!$setup){
 			//le setup n'a pas été fait, on le fais maintenant
 			//création des spéciales dans la bdd
 			$stages = $wrcInterface->getStages();
 			
 			foreach ($stages as $index=>$stage){
-				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $stage['status'], $running['Rally']['id']);
+				switch ($stage['status']){
+					case 'COMPLETED':
+						$status = RALLy_STATUS_COMPLETED;
+						break;
+					case 'CANCELLED':
+						$status = RALLy_STATUS_CANCELLED;
+						break;
+					default:
+						$status = RALLy_STATUS_UPCOMING;
+						break;
+				}
+				
+				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $status, $running['Rally']['id']);
 			}
 		}
+		
+		
 	}
 }
 ?>
