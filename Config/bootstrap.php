@@ -109,3 +109,8 @@ CakeLog::config('error', array(
 ));
 
 define('DATETIME_SQL', 'Y-m-d H:i:s');
+
+define('RALLy_STATUS_UPCOMING', 0);
+define('RALLy_STATUS_RUNNING', 1);
+define('RALLy_STATUS_COMPLETED', 2);
+define('RALLy_STATUS_CANCELLED', 3);
