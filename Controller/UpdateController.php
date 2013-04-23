@@ -18,8 +18,12 @@ class UpdateController extends AppController {
 		debug($setup);
 		if (!$setup){
 			//le setup n'a pas été fait, on le fais maintenant
-			//on récupere la liste des stages
-			$wrcInterface->getStages();
+			//création des spéciales dans la bdd
+			$stages = $wrcInterface->getStages();
+			
+			foreach ($stages as $index=>$stage){
+				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $stage['status'], $running['Rally']['id']);
+			}
 		}
 	}
 }

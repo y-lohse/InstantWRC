@@ -4,6 +4,16 @@ class Stage extends AppModel{
 	public $alias = 'Stage';
 	public $primaryKey = 'stage_id';
 	
+	public function createStage($name, $distance, $order, $status, $rally){
+		$this->create();
+		$this->set('stage_name', $name);
+		$this->set('stage_distance', $distance);
+		$this->set('stage_order', $order);
+		$this->set('stage_status', $status);
+		$this->set('fk_rally_id', $rally);
+		return $this->save();
+	}
+	
 	public function countStages($rally_id){
 		$conditions = array('fk_rally_id'=>$rally_id);
 	
