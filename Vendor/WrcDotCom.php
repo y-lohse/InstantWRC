@@ -123,6 +123,29 @@ class WrcDotCom{
 							'time'=>$time);
 			array_push($stageTimes, $time);
 		}
+		
+		//isole les temps généraux
+		$lines = $overallTable->childNodes;
+		$overallList = array();
+		foreach ($lines as $index=>$line){
+			if ($index < 1) continue;
+			array_push($overallList, $line);
+		}
+		
+		//convertis les temps en tableau
+		$overallTimes = array();
+		foreach ($overallList as $timeNode){
+			$infos = $timeNode->childNodes;
+		
+			$position = $infos->item(0)->nodeValue;
+			$driver = $infos->item(2)->nodeValue;
+			$time = $infos->item(4)->nodeValue;
+		
+			$time = array( 'driver'=>$driver,
+					'position'=>$position,
+					'time'=>$time);
+			array_push($overallTimes, $time);
+		}
 	}
 	
 }
