@@ -9,18 +9,26 @@ class UpdateController extends AppController {
 		if (count($running) === 0) exit();//aucun rally en cours
 		
 		//on a le rally en cours
-		//est-ce que l'on a fais le setup?
-		$setup = ($this->Stage->countStages($running['Rally']['id']) > 0) ?true : false; 
+		$rally_id = $running['Rally']['id'];
 		
 		App::import('Vendor', 'WrcDotCom');
 		$wrcInterface = new WrcDotCom($running['Rally']['url']);
 		
-		//setup du rally
+		//création ou mAJ de la liste des spéciales
+		$this->initStages($rally_id, $wrcInterface);
+		
+		$stages = $this->Stage->getStages($rally_id);
+	}
+	
+	private function initStages($rally_id, $wrcInterface){
+		//est-ce que l'on a fais le setup?
+		$setup = ($this->Stage->countStages($rally_id) > 0) ? true : false;
+		
 		if (!$setup){
 			//le setup n'a pas été fait, on le fais maintenant
 			//création des spéciales dans la bdd
 			$stages = $wrcInterface->getStages();
-			
+				
 			foreach ($stages as $index=>$stage){
 				switch ($stage['status']){
 					case 'COMPLETED':
@@ -33,12 +41,19 @@ class UpdateController extends AppController {
 						$status = RALLy_STATUS_UPCOMING;
 						break;
 				}
-				
-				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $status, $running['Rally']['id']);
+		
+				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $status, $rally_id);
 			}
 		}
-		
-		
+		else{
+			//le setup a été fait, faut il mettre à jour la liste des spéciales?
+			//@TODO : décider s'il faut ou non faire la mise à jour
+			$needsUpdate = false;
+				
+			if ($needsUpdate){
+				//@TODO : faire la mise à jour
+			}
+		}
 	}
 }
 ?>
