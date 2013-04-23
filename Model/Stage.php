@@ -25,7 +25,8 @@ class Stage extends AppModel{
 		$fields = array('stage_id'=>'id',
 						'stage_name'=>'name',
 						'stage_distance'=>'distance',
-						'stage_status'=>'status');
+						'stage_status'=>'status',
+						'stage_order'=>'order');
 		$conditions = array('fk_rally_id'=>$rally_id);
 		
 		$params= array('fields'=>$this->fieldsAs($fields),

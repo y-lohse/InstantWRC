@@ -18,24 +18,23 @@ class UpdateController extends AppController {
 		$this->initStages($rally_id, $wrcInterface);
 		
 		$stages = $this->Stage->getStages($rally_id);
-		debug($stages);
 		foreach ($stages as $stage){
 			if ($stage['Stage']['status'] == RALLy_STATUS_UPCOMING){
 				//cette spéciale n'a pas commencé, donc les suivantes non plus, donc on arrete la
-				debug('breaking at '.$stage['Stage']['name']);
 				break;
 			}
 			else if ($stage['Stage']['status'] == RALLy_STATUS_CANCELLED){
 				//spéciale annulée, on passe à la suivante sans s'occuper de celle la
-				debug('skipping '.$stage['Stage']['name']);
+				continue;
 			}
 			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED && $this->Driver->countStageTimes($stage['Stage']['id']) === 0){
 				//spéciale terminée, mais les résultats n'otn pas été chargés encore
 				debug('completed but loading '.$stage['Stage']['name']);
+				$this->updateStageTimes($stage['Stage']['order'], $wrcInterface);
 			}
 			else {
 				//spéciale en cours
-				debug('running '.$stage['Stage']['name']);
+				//debug('running '.$stage['Stage']['name']);
 			}
 		}
 	}
@@ -74,6 +73,10 @@ class UpdateController extends AppController {
 				//@TODO : faire la mise à jour
 			}
 		}
+	}
+	
+	private function updateStageTimes($stage_num, $wrcInterface){
+		$wrcInterface->getStage($stage_num);
 	}
 }
 ?>
