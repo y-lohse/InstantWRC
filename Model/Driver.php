@@ -4,6 +4,12 @@ class Driver extends AppModel{
 	public $alias = 'Driver';
 	public $primaryKey = 'driver_id';
 	
+	public function registerDriver($name){
+		$this->create();
+		$this->set('driver_name', $name);
+		return $this->save();
+	}
+	
 	public function getOverALlTimes($rally_id){
 		$fields = array('Driver.driver_name'=>'name',
 						'Overall.overall_time'=>'time');

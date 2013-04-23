@@ -146,6 +146,8 @@ class WrcDotCom{
 					'time'=>$time);
 			array_push($overallTimes, $time);
 		}
+		
+		return array('stage'=>$stageTimes, 'overall'=>$overallTimes);
 	}
 	
 }

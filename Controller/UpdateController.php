@@ -1,6 +1,6 @@
 <?php
 class UpdateController extends AppController {
-	public $uses = array('Rally', 'Stage', 'Driver');
+	public $uses = array('Rally', 'Stage', 'Driver', 'Overall');
 	
 	//point d'entrée pour les MAJ
 	public function index(){
@@ -30,7 +30,7 @@ class UpdateController extends AppController {
 			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED && $this->Driver->countStageTimes($stage['Stage']['id']) === 0){
 				//spéciale terminée, mais les résultats n'otn pas été chargés encore
 				debug('completed but loading '.$stage['Stage']['name']);
-				$this->updateStageTimes($stage['Stage']['order'], $wrcInterface);
+				$this->update($rally_id, $stage['Stage']['order'], $wrcInterface);
 			}
 			else {
 				//spéciale en cours
@@ -75,8 +75,36 @@ class UpdateController extends AppController {
 		}
 	}
 	
-	private function updateStageTimes($stage_num, $wrcInterface){
-		$wrcInterface->getStage($stage_num);
+	private function update($rally_id, $stage_num, $wrcInterface){
+		$times = $wrcInterface->getStage($stage_num);
+		
+		$this->updateOverall($rally_id, $times['overall']);
+	}
+	
+	private function updateOverall($rally_id, $times){
+		foreach ($times as $time){
+			//verifie si le piltoe exite déja dans la bdd
+			$exists = $this->Driver->findByDriverName($time['driver']);
+			if (count($exists) === 0){
+				//il faut créer le pilote
+				$driver = $this->Driver->registerDriver($time['driver']);
+				$driver_id = $driver['Driver']['driver_id'];
+			}
+			else {
+				$driver_id = $exists['Driver']['driver_id'];
+			}
+			
+			//verifie si lepilote est enregistré comme participant au rallye
+			$overall = $this->Overall->findByFkDriverId($driver_id);
+			if (count($overall) === 0){
+				//crée l'overall
+				$this->Overall->registerTime($driver_id, $rally_id, $time['time']);
+			}
+			else{
+				//maj de l'overall
+				$this->Overall->updateOverall($driver_id, $rally_id, $time['time']);
+			}
+		}
 	}
 }
 ?>
