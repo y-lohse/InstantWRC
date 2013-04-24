@@ -1,6 +1,6 @@
 <?php
 class UpdateController extends AppController {
-	public $uses = array('Rally', 'Stage', 'Driver', 'Overall');
+	public $uses = array('Rally', 'Stage', 'Driver', 'Overall', 'StageTime');
 	
 	//point d'entrée pour les MAJ
 	public function index(){
@@ -30,7 +30,7 @@ class UpdateController extends AppController {
 			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED && $this->Driver->countStageTimes($stage['Stage']['id']) === 0){
 				//spéciale terminée, mais les résultats n'otn pas été chargés encore
 				debug('completed but loading '.$stage['Stage']['name']);
-				$this->update($rally_id, $stage['Stage']['order'], $wrcInterface);
+				$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
 			}
 			else {
 				//spéciale en cours
@@ -75,10 +75,11 @@ class UpdateController extends AppController {
 		}
 	}
 	
-	private function update($rally_id, $stage_num, $wrcInterface){
+	private function update($rally_id, $stage_id, $stage_num, $wrcInterface){
 		$times = $wrcInterface->getStage($stage_num);
 		
 		$this->updateOverall($rally_id, $times['overall']);
+		$this->updateStage($times['stage'], $stage_id);
 	}
 	
 	private function updateOverall($rally_id, $times){
@@ -102,9 +103,29 @@ class UpdateController extends AppController {
 			}
 			else{
 				//maj de l'overall
+				//@TODO : ne ^pas faire caa chaque fois
 				$this->Overall->updateOverall($driver_id, $rally_id, $time['time']);
 			}
 		}
+	}
+	
+	private function updateStage($times, $stage_id){
+		$hasChanged = false;
+		
+		foreach ($times as $time){
+			$driver = $this->Driver->findByDriverName($time['driver']);
+			$driver_id = $driver['Driver']['driver_id'];
+			
+			//verifie si on a déja enregistré le chrono de ce pilote/spéciale
+			$exists = $this->StageTime->findByFkDriverId($driver_id);
+			if (count($exists) === 0){
+				//pas enregistré pour cette course, on le crée
+				$this->StageTime->registerTime($driver_id, $stage_id, $time['time']);
+				$hasChanged = true;
+			}
+		}
+		
+		return $hasChanged;
 	}
 }
 ?>
