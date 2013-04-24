@@ -1,0 +1,124 @@
+/* RESET */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/************/
+/* Général  */
+/***********/
+
+$header-color:#242529;
+$main-color:#8dc72d;
+$padding_20:3.3333%; /* 20/600 */
+
+
+/* Typo */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:600,700);
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    line-height: 1.5em;
+}
+
+h1{
+    font-size: 2.4rem;
+}
+
+/***************************/
+/* Mise en page générale  */
+/**************************/
+
+.wrapper{
+    max-width: 1000px;
+    margin:0 auto;
+}
+
+/* header */
+
+header, nav, #content{
+    padding:0 $padding_20; /* 20/600 */
+}
+
+header{
+    background-color:$header-color;
+    padding: 10px $padding_20;
+}
+
+header .wrapper > *{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+label[for="refresh"]{
+    display: none;
+}
+
+/* nav */
+
+nav{
+    background-color:$main-color;
+}
+
+nav li{
+    display: inline-block;
+}
+
+nav a{
+    display: block;
+    padding:15px 20px;
+    text-transform: uppercase;
+    color:#fff;
+    &:hover,&.menu_actif{color:#324a09;};
+    text-decoration:none;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.16);
+}
+
+

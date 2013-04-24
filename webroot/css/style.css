@@ -1,0 +1,140 @@
+@charset "CP850";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:600,700);
+/* RESET */
+/* line 15, ../scss/style.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+/* line 25, ../scss/style.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* line 28, ../scss/style.scss */
+body {
+  line-height: 1;
+}
+
+/* line 31, ../scss/style.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 34, ../scss/style.scss */
+blockquote, q {
+  quotes: none;
+}
+
+/* line 38, ../scss/style.scss */
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+/* line 42, ../scss/style.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/************/
+/* Général  */
+/***********/
+/* 20/600 */
+/* Typo */
+/* line 60, ../scss/style.scss */
+html {
+  font-size: 62.5%;
+}
+
+/* line 64, ../scss/style.scss */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.5em;
+}
+
+/* line 71, ../scss/style.scss */
+h1 {
+  font-size: 2.4rem;
+}
+
+/***************************/
+/* Mise en page générale  */
+/**************************/
+/* line 79, ../scss/style.scss */
+.wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* header */
+/* line 86, ../scss/style.scss */
+header, nav, #content {
+  padding: 0 3.3333%;
+  /* 20/600 */
+}
+
+/* line 90, ../scss/style.scss */
+header {
+  background-color: #242529;
+  padding: 10px 3.3333%;
+}
+
+/* line 95, ../scss/style.scss */
+header .wrapper > * {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* line 100, ../scss/style.scss */
+label[for="refresh"] {
+  display: none;
+}
+
+/* nav */
+/* line 106, ../scss/style.scss */
+nav {
+  background-color: #8dc72d;
+}
+
+/* line 110, ../scss/style.scss */
+nav li {
+  display: inline-block;
+}
+
+/* line 114, ../scss/style.scss */
+nav a {
+  display: block;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.16);
+}
+/* line 119, ../scss/style.scss */
+nav a:hover, nav a.menu_actif {
+  color: #324a09;
+}

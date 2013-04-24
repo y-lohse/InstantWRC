@@ -10,6 +10,7 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 	<?php echo $this->fetch('content'); ?>
