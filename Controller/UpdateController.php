@@ -27,14 +27,16 @@ class UpdateController extends AppController {
 				//spéciale annulée, on passe à la suivante sans s'occuper de celle la
 				continue;
 			}
-			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED && $this->Driver->countStageTimes($stage['Stage']['id']) === 0){
-				//spéciale terminée, mais les résultats n'otn pas été chargés encore
-				debug('completed but loading '.$stage['Stage']['name']);
-				$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
+			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED){
+				if ($this->Driver->countStageTimes($stage['Stage']['id']) === 0){
+					//spéciale terminée, mais les résultats n'ont pas encore été chargés
+					debug('completed but loading '.$stage['Stage']['name']);
+					$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
+				}
 			}
-			else {
+			else if ($stage['Stage']['status'] == RALLy_STATUS_RUNNING){
 				//spéciale en cours
-				//debug('running '.$stage['Stage']['name']);
+				debug('running '.$stage['Stage']['name']);
 			}
 		}
 	}
@@ -103,7 +105,7 @@ class UpdateController extends AppController {
 			}
 			else{
 				//maj de l'overall
-				//@TODO : ne ^pas faire caa chaque fois
+				//@TODO : ne ^pas faire ca a chaque fois
 				$this->Overall->updateOverall($driver_id, $rally_id, $time['time']);
 			}
 		}
@@ -117,9 +119,10 @@ class UpdateController extends AppController {
 			$driver_id = $driver['Driver']['driver_id'];
 			
 			//verifie si on a déja enregistré le chrono de ce pilote/spéciale
-			$exists = $this->StageTime->findByFkDriverId($driver_id);
-			if (count($exists) === 0){
+			$exists = $this->StageTime->isRegistered($driver_id, $stage_id);
+			if ($exists == 0){
 				//pas enregistré pour cette course, on le crée
+				//@TODO : vérifier qu'il y a VRAIMENT besoin de faire une MAJ
 				$this->StageTime->registerTime($driver_id, $stage_id, $time['time']);
 				$hasChanged = true;
 			}
