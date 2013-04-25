@@ -30,13 +30,13 @@ class UpdateController extends AppController {
 			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED){
 				if ($this->Driver->countStageTimes($stage['Stage']['id']) === 0){
 					//spéciale terminée, mais les résultats n'ont pas encore été chargés
-					debug('completed but loading '.$stage['Stage']['name']);
 					$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
 				}
 			}
 			else if ($stage['Stage']['status'] == RALLy_STATUS_RUNNING){
 				//spéciale en cours
 				debug('running '.$stage['Stage']['name']);
+				$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
 			}
 		}
 	}
@@ -69,6 +69,7 @@ class UpdateController extends AppController {
 		else{
 			//le setup a été fait, faut il mettre à jour la liste des spéciales?
 			//@TODO : décider s'il faut ou non faire la mise à jour
+			//il faut se baser sur le tempsannoncé du départ de la spéciale
 			$needsUpdate = false;
 				
 			if ($needsUpdate){
@@ -103,9 +104,8 @@ class UpdateController extends AppController {
 				//crée l'overall
 				$this->Overall->registerTime($driver_id, $rally_id, $time['time']);
 			}
-			else{
+			else if ($overall['Overall']['overall_time'] != $time['time']){
 				//maj de l'overall
-				//@TODO : ne ^pas faire ca a chaque fois
 				$this->Overall->updateOverall($driver_id, $rally_id, $time['time']);
 			}
 		}
