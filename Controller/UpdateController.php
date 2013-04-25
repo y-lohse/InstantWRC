@@ -35,7 +35,6 @@ class UpdateController extends AppController {
 			}
 			else if ($stage['Stage']['status'] == RALLy_STATUS_RUNNING){
 				//spéciale en cours
-				debug('running '.$stage['Stage']['name']);
 				$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
 			}
 		}
@@ -45,11 +44,11 @@ class UpdateController extends AppController {
 		//est-ce que l'on a fais le setup?
 		$setup = ($this->Stage->countStages($rally_id) > 0) ? true : false;
 		
-		if (!$setup){
+		if (!$setup || true){
 			//le setup n'a pas été fait, on le fais maintenant
 			//création des spéciales dans la bdd
 			$stages = $wrcInterface->getStages();
-				
+			
 			foreach ($stages as $index=>$stage){
 				switch ($stage['status']){
 					case 'COMPLETED':
@@ -62,11 +61,16 @@ class UpdateController extends AppController {
 						$status = RALLy_STATUS_UPCOMING;
 						break;
 				}
+				
+				$schedule = new DateTime($stage['scheduled']);
+				debug($schedule);
+				//$schedule->
 		
-				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $status, $rally_id);
+				//$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $status, $rally_id);
 			}
 		}
 		else{
+			debug('setup ok');
 			//le setup a été fait, faut il mettre à jour la liste des spéciales?
 			//@TODO : décider s'il faut ou non faire la mise à jour
 			//il faut se baser sur le tempsannoncé du départ de la spéciale
@@ -79,10 +83,10 @@ class UpdateController extends AppController {
 	}
 	
 	private function update($rally_id, $stage_id, $stage_num, $wrcInterface){
-		$times = $wrcInterface->getStage($stage_num);
+		//$times = $wrcInterface->getStage($stage_num);
 		
-		$this->updateOverall($rally_id, $times['overall']);
-		$this->updateStage($times['stage'], $stage_id);
+		//$this->updateOverall($rally_id, $times['overall']);
+		//$this->updateStage($times['stage'], $stage_id);
 	}
 	
 	private function updateOverall($rally_id, $times){
@@ -122,7 +126,6 @@ class UpdateController extends AppController {
 			$exists = $this->StageTime->isRegistered($driver_id, $stage_id);
 			if ($exists == 0){
 				//pas enregistré pour cette course, on le crée
-				//@TODO : vérifier qu'il y a VRAIMENT besoin de faire une MAJ
 				$this->StageTime->registerTime($driver_id, $stage_id, $time['time']);
 				$hasChanged = true;
 			}
