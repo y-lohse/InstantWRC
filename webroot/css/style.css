@@ -72,69 +72,128 @@ html {
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
-  font-size: 2rem;
-  line-height: 1.5em;
+  font-size: 1.4em;
 }
 
-/* line 71, ../scss/style.scss */
+/* line 70, ../scss/style.scss */
 h1 {
-  font-size: 2.4rem;
+  font-size: 1.25em;
+}
+
+/* line 74, ../scss/style.scss */
+p {
+  line-height: 1.5em;
 }
 
 /***************************/
 /* Mise en page générale  */
 /**************************/
-/* line 79, ../scss/style.scss */
+/* line 82, ../scss/style.scss */
 .wrapper {
   max-width: 1000px;
   margin: 0 auto;
 }
 
 /* header */
-/* line 86, ../scss/style.scss */
-header, nav, #content {
-  padding: 0 3.3333%;
-  /* 20/600 */
-}
-
-/* line 90, ../scss/style.scss */
+/* line 89, ../scss/style.scss */
 header {
   background-color: #242529;
   padding: 10px 3.3333%;
 }
 
-/* line 95, ../scss/style.scss */
+/* line 94, ../scss/style.scss */
 header .wrapper > * {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 100, ../scss/style.scss */
+/* line 99, ../scss/style.scss */
 label[for="refresh"] {
   display: none;
 }
 
 /* nav */
-/* line 106, ../scss/style.scss */
+/* line 105, ../scss/style.scss */
 nav {
   background-color: #8dc72d;
 }
 
-/* line 110, ../scss/style.scss */
+/* line 109, ../scss/style.scss */
+nav ul {
+  text-align: center;
+}
+
+/* line 113, ../scss/style.scss */
 nav li {
   display: inline-block;
 }
 
-/* line 114, ../scss/style.scss */
+/* line 117, ../scss/style.scss */
 nav a {
   display: block;
-  padding: 15px 20px;
+  padding: 15px;
   text-transform: uppercase;
   color: #fff;
   text-decoration: none;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.16);
 }
-/* line 119, ../scss/style.scss */
+/* line 122, ../scss/style.scss */
 nav a:hover, nav a.menu_actif {
   color: #324a09;
+}
+
+/* line 127, ../scss/style.scss */
+nav .menu_disable {
+  color: #b9de7c;
+  text-shadow: none;
+  cursor: default;
+}
+/* line 130, ../scss/style.scss */
+nav .menu_disable:hover {
+  color: #b9de7c;
+}
+
+/***************/
+/* Page Rally */
+/*************/
+/* line 138, ../scss/style.scss */
+.page_rally li {
+  border-bottom: 1px solid #e3e3e3;
+  display: table;
+  width: 100%;
+}
+
+/* line 144, ../scss/style.scss */
+.page_rally li > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* line 149, ../scss/style.scss */
+.page_rally li > span:first-child {
+  display: table-cell;
+  background-color: #ccd1d4;
+  font-size: 1.8em;
+  color: #56636c;
+  padding: 0.5em;
+  width: 30px;
+  text-align: center;
+}
+
+/* line 159, ../scss/style.scss */
+.page_rally li > span + span {
+  padding-left: 20px;
+  color: #56636c;
+}
+
+/* line 164, ../scss/style.scss */
+.page_rally li > span + span + span {
+  width: 100px;
+  text-align: center;
+  padding: 0 5px 0 15px;
+}
+
+/* line 170, ../scss/style.scss */
+.page_rally li span p + p {
+  font-size: 0.7em;
 }
