@@ -9,7 +9,7 @@ class Stage extends AppModel{
 		$this->set('stage_name', $name);
 		$this->set('stage_distance', $distance);
 		$this->set('stage_order', $order);
-		$this->set('stage_scheduled', $scheduled);
+		$this->set('stage_scheduled', $scheduled->format(DATETIME_SQL));
 		$this->set('stage_status', $status);
 		$this->set('fk_rally_id', $rally);
 		return $this->save();

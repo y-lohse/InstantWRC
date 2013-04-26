@@ -44,10 +44,11 @@ class UpdateController extends AppController {
 		//est-ce que l'on a fais le setup?
 		$setup = ($this->Stage->countStages($rally_id) > 0) ? true : false;
 		
-		if (!$setup || true){
+		if (!$setup){
 			//le setup n'a pas été fait, on le fais maintenant
 			//création des spéciales dans la bdd
 			$stages = $wrcInterface->getStages();
+			$timezone = $this->Rally->getTimezone($rally_id);
 			
 			foreach ($stages as $index=>$stage){
 				switch ($stage['status']){
@@ -62,11 +63,12 @@ class UpdateController extends AppController {
 						break;
 				}
 				
-				$schedule = new DateTime($stage['scheduled']);
-				debug($schedule);
-				//$schedule->
-		
-				//$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $status, $rally_id);
+				//création dela date de début avec le fuseau horaire local
+				$schedule = new DateTime($stage['scheduled'], new DateTimeZone($timezone));
+				//conversion au fuseau du serveur
+				$schedule->setTimezone(new DateTimeZone('UTC'));
+				
+				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $schedule, $status, $rally_id);
 			}
 		}
 		else{
