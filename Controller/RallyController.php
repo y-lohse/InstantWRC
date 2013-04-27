@@ -15,8 +15,10 @@ class RallyController extends AppController {
 		foreach ($rawTimes as $time){
 			array_push($times, array('driver'=>$time['Driver']['name'],
 									 'time'=>$time['Overall']['time'],
-									 'retired'=>(bool)$time['Overall']['retired'],));
+									 'retired'=>(bool)$time['Overall']['retired'],
+									 'last_stage'=>$time[0]['last_stage_id']));
 		}
+		//debug($times);
 		usort($times, array($this, 'sortTimes'));
 	
 		$this->set('times', $times);
