@@ -45,6 +45,8 @@ class UpdateController extends AppController {
 				}
 			}
 		}
+		
+		exit();
 	}
 	
 	private function initStages($rally_id, $wrcInterface){
