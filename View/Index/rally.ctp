@@ -1,6 +1,6 @@
 <header>
 	<div class="wrapper">
-		<a href="#" class="icon-trophy" title="Classement général"></a>
+		<a href="#/ranking" class="icon-trophy" title="Classement général"></a>
 		<h1>Vodafone Rally de Portugal</h1>
 		<div id="check_refresh">
 			<input id="refresh" type="checkbox" checked="true" />
@@ -12,8 +12,8 @@
 <nav>
 	<div class="wrapper">
 		<ul >
-			<li><a href="#" class="menu_actif">Results</a></li>
-			<li><a href="#">Stages</a></li>
+			<li><a href="#/rally" class="menu_actif">Results</a></li>
+			<li><a href="#/stages">Stages</a></li>
 			<li><a href="#" class="menu_disable">Prevision</a></li>
 		</ul>	
 	</div>
