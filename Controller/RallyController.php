@@ -1,20 +1,20 @@
 <?php
 class RallyController extends AppController {
-	public $uses = array('Stage', 'Driver');
+	public $uses = array('Stage', 'Overall', 'StageTime');
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
-		$this->RequestHandler->renderAs($this, 'json');
+		//$this->RequestHandler->renderAs($this, 'json');
 	}
 	
-	public function view($id){
-		$id = (int)$id;
+	public function view($rally_id){
+		$rally_id = (int)$rally_id;
 		
-		$rawTimes = $this->Driver->getOverALlTimes($id);
+		$rawTimes = $this->Overall->getOverALlTimes($rally_id);
 		$times = array();
 		foreach ($rawTimes as $time){
 			array_push($times, array('driver'=>$time['Driver']['name'],
-									  'time'=>$time['Overall']['time']));
+									 'time'=>$time['Overall']['time']));
 		}
 	
 		$this->set('times', $times);
