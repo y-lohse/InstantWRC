@@ -16,16 +16,9 @@ class RallyController extends AppController {
 			array_push($times, array('driver'=>$time['Driver']['name'],
 									  'time'=>$time['Overall']['time']));
 		}
-		
-		$rawStages = $this->Stage->getSTages($id);
-		$stages= array();
-		foreach ($rawStages as $stage){
-			array_push($stages, $stage['Stage']);
-		}
 	
 		$this->set('times', $times);
-		$this->set('stages', $stages);
-		$this->set('_serialize', array('times', 'stages'));
+		$this->set('_serialize', array('times'));
 	}
 }
 ?>
