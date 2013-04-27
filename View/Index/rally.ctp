@@ -1,6 +1,6 @@
 <header>
 	<div class="wrapper">
-		<a href="#">Classement général</a>
+		<span aria-hidden="true" class="icon-trophy"></span><a href="#">Classement général</a>
 		<h1>Vodafone Rally de Portugal</h1>
 		<div id="check_refresh">
 			<label for="refresh">Auto-refresh:</label>
