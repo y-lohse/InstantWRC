@@ -13,76 +13,85 @@ class WrcDotCom{
 	}
 	
 	public function getStages($timezone){
-		$url = $this->baseUrl.$this::STAGE_LIST_SEGMENT;
-		$page = URLFetcher::getFile($url);
+// 		$url = $this->baseUrl.$this::STAGE_LIST_SEGMENT;
+// 		$page = URLFetcher::getFile($url);
 		
-		//isole le body
-		$start = strpos($page, '<body');
-		$end = strrpos($page, '</body>');
-		$domstr = substr($page, $start, $end+7);
+// 		//isole le body
+// 		$start = strpos($page, '<body');
+// 		$end = strrpos($page, '</body>');
+// 		$domstr = substr($page, $start, $end+7);
 		
-		//recupere le tableau de stpéciales
-		$dom = DOMDocument::loadHTML($domstr);
-		$tables = $dom->getElementsByTagName('table');
-		$resultTable = NULL;
+// 		//recupere le tableau de stpéciales
+// 		$dom = DOMDocument::loadHTML($domstr);
+// 		$tables = $dom->getElementsByTagName('table');
+// 		$resultTable = NULL;
 		
-		foreach ($tables as $tableNode){
-			if ((string)$tableNode->getAttribute('class') === 'results'){
-				$resultTable = $tableNode;
-				break;
-			}
-		}
+// 		foreach ($tables as $tableNode){
+// 			if ((string)$tableNode->getAttribute('class') === 'results'){
+// 				$resultTable = $tableNode;
+// 				break;
+// 			}
+// 		}
 		
-		//isole les spéciales
-		$lines = $tableNode->childNodes;
-		$stageList = array();
-		$currentDay = NULL;
+// 		//isole les spéciales
+// 		$lines = $tableNode->childNodes;
+// 		$stageList = array();
+// 		$currentDay = NULL;
 		
-		foreach ($lines as $index=>$line){
-			if ($index < 1) continue;//onzappe la premiere ligne
+// 		foreach ($lines as $index=>$line){
+// 			if ($index < 1) continue;//onzappe la premiere ligne
 			
-			if ($line->getAttribute('class') == 'leg'){
-				$currentDay = $line->childNodes->item(0)->nodeValue;
-				$currentDay = substr($currentDay, strpos($currentDay, '-')+2);
-			}
-			else{
-				$line->setAttribute('day', $currentDay);
-				array_push($stageList, $line);
-			}
-		}
+// 			if ($line->getAttribute('class') == 'leg'){
+// 				$currentDay = $line->childNodes->item(0)->nodeValue;
+// 				$currentDay = substr($currentDay, strpos($currentDay, '-')+2);
+// 			}
+// 			else{
+// 				$line->setAttribute('day', $currentDay);
+// 				array_push($stageList, $line);
+// 			}
+// 		}
 		
-		//convertis les spéciales en tableaux
+// 		//convertis les spéciales en tableaux
+// 		$stages = array();
+// 		foreach ($stageList as $stageNode){
+// 			$infos = $stageNode->childNodes;
+			
+// 			$name = $infos->item(0)->nodeValue.' '.$infos->item(1)->nodeValue;
+// 			$km = $infos->item(2)->nodeValue;
+// 			$passage = $stageNode->getAttribute('day').' '.$infos->item(3)->nodeValue;
+			
+// 			switch ($infos->item(4)->nodeValue){
+// 				case 'COMPLETED':
+// 					$status = RALLy_STATUS_COMPLETED;
+// 					break;
+// 				case 'CANCELLED':
+// 					$status = RALLy_STATUS_CANCELLED;
+// 					break;
+// 				default:
+// 					$status = RALLy_STATUS_UPCOMING;
+// 					break;
+// 			}
+			
+// 			//création dela date de début avec le fuseau horaire local
+// 			$schedule = new DateTime($passage, new DateTimeZone($timezone));
+// 			//conversion au fuseau du serveur
+// 			$schedule->setTimezone(new DateTimeZone(date_default_timezone_get()));
+			
+// 			$stage = array( 'name'=>$name,
+// 							'distance'=>$km,
+// 							'scheduled'=>$schedule,
+// 							'status'=>$status);
+// 			array_push($stages, $stage);
+// 		}
 		$stages = array();
-		foreach ($stageList as $stageNode){
-			$infos = $stageNode->childNodes;
-			
-			$name = $infos->item(0)->nodeValue.' '.$infos->item(1)->nodeValue;
-			$km = $infos->item(2)->nodeValue;
-			$passage = $stageNode->getAttribute('day').' '.$infos->item(3)->nodeValue;
-			
-			switch ($infos->item(4)->nodeValue){
-				case 'COMPLETED':
-					$status = RALLy_STATUS_COMPLETED;
-					break;
-				case 'CANCELLED':
-					$status = RALLy_STATUS_CANCELLED;
-					break;
-				default:
-					$status = RALLy_STATUS_UPCOMING;
-					break;
-			}
-			
-			//création dela date de début avec le fuseau horaire local
-			$schedule = new DateTime($passage, new DateTimeZone($timezone));
-			//conversion au fuseau du serveur
-			$schedule->setTimezone(new DateTimeZone(date_default_timezone_get()));
-			
-			$stage = array( 'name'=>$name,
-							'distance'=>$km,
-							'scheduled'=>$schedule,
-							'status'=>$status);
-			array_push($stages, $stage);
-		}
+		$stages[] = array( 'name'=>'LE MOULINON - ANTRAIGUES 1',
+ 							'distance'=>'37.10',
+ 							'scheduled'=>new DateTime('27 Apr 13 15:00'),
+ 							'status'=>1);
+		$stages[] = array( 'name'=>'BURZET - ST MARTIAL 1',
+							'distance'=>'30.60',
+							'scheduled'=>new DateTime('27 Apr 13 17:00'),
+							'status'=>0);
 		
 		return $stages;
 	}

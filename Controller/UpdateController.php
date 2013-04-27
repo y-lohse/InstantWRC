@@ -17,25 +17,32 @@ class UpdateController extends AppController {
 		//création ou mAJ de la liste des spéciales
 		$this->initStages($rally_id, $wrcInterface);
 		
-		$stages = $this->Stage->getStages($rally_id);
+		$stages = $this->Stage->findAllByFkRallyId($rally_id);
 		foreach ($stages as $stage){
-			if ($stage['Stage']['status'] == RALLy_STATUS_UPCOMING){
+			if ($stage['Stage']['stage_status'] == RALLy_STATUS_UPCOMING){
 				//cette spéciale n'a pas commencé, donc les suivantes non plus, donc on arrete la
 				break;
 			}
-			else if ($stage['Stage']['status'] == RALLy_STATUS_CANCELLED){
+			else if ($stage['Stage']['stage_status'] == RALLy_STATUS_CANCELLED){
 				//spéciale annulée, on passe à la suivante sans s'occuper de celle la
 				continue;
 			}
-			else if ($stage['Stage']['status'] == RALLy_STATUS_COMPLETED){
-				if ($this->Driver->countStageTimes($stage['Stage']['id']) === 0){
+			else if ($stage['Stage']['stage_status'] == RALLy_STATUS_COMPLETED){
+				if ($this->Driver->countStageTimes($stage['Stage']['stage_id']) === 0){
 					//spéciale terminée, mais les résultats n'ont pas encore été chargés
-					$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
+					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
 				}
 			}
-			else if ($stage['Stage']['status'] == RALLy_STATUS_RUNNING){
+			else if ($stage['Stage']['stage_status'] == RALLy_STATUS_RUNNING){
 				//spéciale en cours
-				$this->update($rally_id, $stage['Stage']['id'], $stage['Stage']['order'], $wrcInterface);
+				//on décide s'ilfaut lancer une maj globale ou pas
+				$now = new DateTime();
+				$updated = new DateTime($stage['Stage']['stage_updated']);
+				$updateDiff = $updated->diff($now);
+				
+				if ($updateDiff->h >= 0 && $updateDiff->i >= STAGE_UPDATE_DELAY){
+					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
+				}
 			}
 		}
 	}
@@ -93,6 +100,9 @@ class UpdateController extends AppController {
 						//@TODO : faire quelque chose, c'estinquietant.
 					}
 					else{
+						//on nefais la MAJ que si le statu a changé,
+						//mais peut etre qu'on pourrait le faire systématiquement, au cas ou
+						//autre chose change
 						if ($stage['status'] != $stages[$index]['Stage']['stage_status']){
 							$this->Stage->updateStatus($stages[$index]['Stage']['stage_id'], $stage['status']);
 						}
@@ -103,10 +113,15 @@ class UpdateController extends AppController {
 	}
 	
 	private function update($rally_id, $stage_id, $stage_num, $wrcInterface){
-		//$times = $wrcInterface->getStage($stage_num);
+		$times = $wrcInterface->getStage($stage_num);
+		debug('updating');
 		
-		//$this->updateOverall($rally_id, $times['overall']);
-		//$this->updateStage($times['stage'], $stage_id);
+		$this->updateOverall($rally_id, $times['overall']);
+		$hasChanged = $this->updateStage($times['stage'], $stage_id);
+		
+		if ($hasChanged){
+			$this->Stage->updateUpdate($stage_id);
+		}
 	}
 	
 	private function updateOverall($rally_id, $times){

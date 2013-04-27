@@ -115,4 +115,8 @@ define('RALLy_STATUS_RUNNING', 1);
 define('RALLy_STATUS_COMPLETED', 2);
 define('RALLy_STATUS_CANCELLED', 3);
 
+//temps entre chaque refresh de laliste des spéciales APRES
+//le début théorique d'une spéciale
 define('STAGELIST_UPDATE_DELAY', 2);
+//temps entre chaque MAJ de d'unespéciale
+define('STAGE_UPDATE_DELAY', 2);
