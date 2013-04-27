@@ -20,5 +20,16 @@ class RallyController extends AppController {
 		$this->set('times', $times);
 		$this->set('_serialize', array('times'));
 	}
+	
+	public function stages($id){
+		$rawStages = $this->Stage->getSTages($id);
+		$stages= array();
+		foreach ($rawStages as $stage){
+			array_push($stages, $stage['Stage']);
+		}
+		
+		$this->set('stages', $stages);
+		$this->set('_serialize', array('stages'));
+	}
 }
 ?>
