@@ -12,7 +12,7 @@ class WrcDotCom{
 		$this->baseUrl = $baseUrl;
 	}
 	
-	public function getStages(){
+	public function getStages($timezone){
 		$url = $this->baseUrl.$this::STAGE_LIST_SEGMENT;
 		$page = URLFetcher::getFile($url);
 		
@@ -59,12 +59,28 @@ class WrcDotCom{
 			$name = $infos->item(0)->nodeValue.' '.$infos->item(1)->nodeValue;
 			$km = $infos->item(2)->nodeValue;
 			$passage = $stageNode->getAttribute('day').' '.$infos->item(3)->nodeValue;
-			$statut = $infos->item(4)->nodeValue;
+			
+			switch ($infos->item(4)->nodeValue){
+				case 'COMPLETED':
+					$status = RALLy_STATUS_COMPLETED;
+					break;
+				case 'CANCELLED':
+					$status = RALLy_STATUS_CANCELLED;
+					break;
+				default:
+					$status = RALLy_STATUS_UPCOMING;
+					break;
+			}
+			
+			//création dela date de début avec le fuseau horaire local
+			$schedule = new DateTime($passage, new DateTimeZone($timezone));
+			//conversion au fuseau du serveur
+			$schedule->setTimezone(new DateTimeZone(date_default_timezone_get()));
 			
 			$stage = array( 'name'=>$name,
 							'distance'=>$km,
-							'scheduled'=>$passage,
-							'status'=>$statut);
+							'scheduled'=>$schedule,
+							'status'=>$status);
 			array_push($stages, $stage);
 		}
 		

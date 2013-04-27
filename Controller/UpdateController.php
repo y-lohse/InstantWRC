@@ -47,28 +47,11 @@ class UpdateController extends AppController {
 		if (!$setup){
 			//le setup n'a pas été fait, on le fais maintenant
 			//création des spéciales dans la bdd
-			$stages = $wrcInterface->getStages();
 			$timezone = $this->Rally->getTimezone($rally_id);
+			$stages = $wrcInterface->getStages($timezone);
 			
 			foreach ($stages as $index=>$stage){
-				switch ($stage['status']){
-					case 'COMPLETED':
-						$status = RALLy_STATUS_COMPLETED;
-						break;
-					case 'CANCELLED':
-						$status = RALLy_STATUS_CANCELLED;
-						break;
-					default:
-						$status = RALLy_STATUS_UPCOMING;
-						break;
-				}
-				
-				//création dela date de début avec le fuseau horaire local
-				$schedule = new DateTime($stage['scheduled'], new DateTimeZone($timezone));
-				//conversion au fuseau du serveur
-				$schedule->setTimezone(new DateTimeZone('UTC'));
-				
-				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $schedule, $status, $rally_id);
+				$this->Stage->createStage($stage['name'], $stage['distance'], $index+1, $stage['scheduled'], $stage['status'], $rally_id);
 			}
 		}
 		else{
@@ -88,17 +71,33 @@ class UpdateController extends AppController {
 						//mais en BDD elle est toujours annoncé comme à venir
 						$updated = new DateTime($stage['Stage']['stage_updated']);
 						$updateDiff = $updated->diff($now);
+						
 						if ($updateDiff->i >= STAGELIST_UPDATE_DELAY){
+							//ca fais plus de STAGELIST_UPDATE_DELAY minutes que l'on a pas
+							//maj la liste des spéciales, on le fais maintenant
 							$needsUpdate = true;
-							break;
+							break;//et comme on les met toutes à jourpas besoin d'aller plus loin.
 						}
 					}	
 				}	
 			}
 				
 			if ($needsUpdate){
-				//@TODO : faire la mise à jour
-				debug('update stagelist');
+				//mise à jour des spéciales
+				$timezone = $this->Rally->getTimezone($rally_id);
+				$liveStages = $wrcInterface->getStages($timezone);
+				
+				foreach ($liveStages as $index=>$stage){
+					//normalement l'odre dans $liveSTages et $stages est identique, mais au cas ou...
+					if ($stage['name'] != $stages[$index]['Stage']['stage_name']){
+						//@TODO : faire quelque chose, c'estinquietant.
+					}
+					else{
+						if ($stage['status'] != $stages[$index]['Stage']['stage_status']){
+							$this->Stage->updateStatus($stages[$index]['Stage']['stage_id'], $stage['status']);
+						}
+					}
+				}
 			}
 		}
 	}

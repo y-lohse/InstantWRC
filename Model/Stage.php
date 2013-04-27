@@ -4,6 +4,7 @@ class Stage extends AppModel{
 	public $alias = 'Stage';
 	public $primaryKey = 'stage_id';
 	
+	//crée une nouvelle spéciale
 	public function createStage($name, $distance, $order, $scheduled, $status, $rally){
 		$this->create();
 		$this->set('stage_name', $name);
@@ -14,6 +15,14 @@ class Stage extends AppModel{
 		$this->set('stage_status', $status);
 		$this->set('fk_rally_id', $rally);
 		return $this->save();
+	}
+	
+	//mis a jour dustatus d'une spéciale
+	public function updateStatus($stage_id, $status){
+		$this->id = $stage_id;
+		$this->set('stage_status', $status);
+		$this->set('stage_updated', DboSource::expression('UTC_TIMESTAMP()'));
+		$this->save();
 	}
 	
 	public function countStages($rally_id){
