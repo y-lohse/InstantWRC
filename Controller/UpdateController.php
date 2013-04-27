@@ -114,7 +114,6 @@ class UpdateController extends AppController {
 	
 	private function update($rally_id, $stage_id, $stage_num, $wrcInterface){
 		$times = $wrcInterface->getStage($stage_num);
-		debug('updating');
 		
 		$this->updateOverall($rally_id, $times['overall']);
 		$hasChanged = $this->updateStage($times['stage'], $stage_id);
