@@ -12,6 +12,10 @@ class IndexController extends AppController {
 		$this->layout = '';
 	}
 	
+	public function stages(){
+		$this->layout = '';
+	}
+	
 	public function stage(){
 		$this->layout = '';
 	}
