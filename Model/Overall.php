@@ -24,7 +24,8 @@ class Overall extends AppModel{
 	public function getOverALlTimes($rally_id){
 		$fields = array('Driver.driver_name'=>'name',
 						'Driver.driver_id'=>'id',
-						'Overall.overall_time'=>'time');
+						'Overall.overall_time'=>'time',
+						'Overall.overall_retired'=>'retired');
 	
 		$joins = array(
 				array(

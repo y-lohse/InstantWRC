@@ -14,11 +14,10 @@ class RallyController extends AppController {
 		$times = array();
 		foreach ($rawTimes as $time){
 			array_push($times, array('driver'=>$time['Driver']['name'],
-									 'time'=>$time['Overall']['time']));
+									 'time'=>$time['Overall']['time'],
+									 'retired'=>(bool)$time['Overall']['retired'],));
 		}
-		//debug($times);
 		usort($times, array($this, 'sortTimes'));
-		debug($times);
 	
 		$this->set('times', $times);
 		$this->set('_serialize', array('times'));
@@ -26,6 +25,12 @@ class RallyController extends AppController {
 	
 	//classement parchrno
 	private function sortTimes($a, $b){
+		//comapraison par élmination
+		if ($a['retired'] != $b['retired']){
+			return ($a['retired']) ?1 : -1;
+		}
+		
+		//comparaison au temps
 		if (strlen($a['time']) === strlen($b['time'])){
 			return ($a['time'] > $b['time']) ? 1 : -1;
 		}
