@@ -5,14 +5,12 @@ class Stage extends AppModel{
 	public $primaryKey = 'stage_id';
 	
 	public function createStage($name, $distance, $order, $scheduled, $status, $rally){
-		$now = new DateTime();
-		
 		$this->create();
 		$this->set('stage_name', $name);
 		$this->set('stage_distance', $distance);
 		$this->set('stage_order', $order);
 		$this->set('stage_scheduled', $scheduled->format(DATETIME_SQL));
-		$this->set('stage_updated', $now->format(DATETIME_SQL));
+		$this->set('stage_updated', DboSource::expression('UTC_TIMESTAMP()'));
 		$this->set('stage_status', $status);
 		$this->set('fk_rally_id', $rally);
 		return $this->save();
