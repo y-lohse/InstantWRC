@@ -25,6 +25,14 @@ class Stage extends AppModel{
 		$this->save();
 	}
 	
+	//met a jout uniquement le champs update
+	//ca arrive quand un pilote viens de finir une spéciale
+	public function updateUpdate($stage_id){
+		$this->id = $stage_id;
+		$this->set('stage_updated', DboSource::expression('UTC_TIMESTAMP()'));
+		$this->save();
+	}
+	
 	public function countStages($rally_id){
 		$conditions = array('fk_rally_id'=>$rally_id);
 	
