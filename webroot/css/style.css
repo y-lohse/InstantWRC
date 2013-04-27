@@ -71,29 +71,36 @@ table {
   font-style: normal;
 }
 
-/* line 71, ../scss/style.scss */
+/* line 70, ../scss/style.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 76, ../scss/style.scss */
 html {
   font-size: 62.5%;
 }
 
-/* line 75, ../scss/style.scss */
+/* line 80, ../scss/style.scss */
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   font-size: 1.4em;
 }
 
-/* line 81, ../scss/style.scss */
+/* line 86, ../scss/style.scss */
 h1 {
   font-size: 1.25em;
 }
 
-/* line 85, ../scss/style.scss */
+/* line 90, ../scss/style.scss */
 p {
   line-height: 1.5em;
 }
 
-/* line 89, ../scss/style.scss */
+/* line 94, ../scss/style.scss */
 .icon-trophy, .icon-menu, .icon-loop-alt2 {
   font-family: 'icomoon';
   speak: none;
@@ -105,17 +112,17 @@ p {
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 99, ../scss/style.scss */
+/* line 104, ../scss/style.scss */
 .icon-trophy:before {
   content: "\e001";
 }
 
-/* line 102, ../scss/style.scss */
+/* line 107, ../scss/style.scss */
 .icon-menu:before {
   content: "\e002";
 }
 
-/* line 105, ../scss/style.scss */
+/* line 110, ../scss/style.scss */
 .icon-loop-alt2:before {
   content: "\e000";
 }
@@ -123,47 +130,90 @@ p {
 /***************************/
 /* Mise en page générale  */
 /**************************/
-/* line 113, ../scss/style.scss */
+/* line 118, ../scss/style.scss */
 .wrapper {
   max-width: 1000px;
   margin: 0 auto;
 }
 
 /* header */
-/* line 120, ../scss/style.scss */
+/* line 125, ../scss/style.scss */
 header {
   background-color: #242529;
   padding: 10px 3.3333%;
 }
 
-/* line 125, ../scss/style.scss */
+/* line 130, ../scss/style.scss */
+header > div {
+  display: table;
+  width: 100%;
+}
+
+/* line 135, ../scss/style.scss */
+header h1 {
+  color: #c6cabd;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.16);
+  font-size: 1.1em;
+  text-align: center;
+}
+
+/* line 142, ../scss/style.scss */
 header .wrapper > * {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 130, ../scss/style.scss */
-label[for="refresh"] {
+/* line 147, ../scss/style.scss */
+#refresh {
   display: none;
 }
 
+/* line 151, ../scss/style.scss */
+label[for="refresh"] {
+  cursor: pointer;
+}
+
+/* line 155, ../scss/style.scss */
+#refresh:checked + label .icon-loop-alt2 {
+  color: #8dc72d;
+}
+
+/* line 159, ../scss/style.scss */
+#refresh + label .icon-loop-alt2 {
+  color: #c02436;
+}
+
+/* line 163, ../scss/style.scss */
+.icon-trophy, .icon-loop-alt2 {
+  color: #c6cabd;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.16);
+  text-decoration: none;
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+/* line 171, ../scss/style.scss */
+.icon-trophy, #check_refresh {
+  width: 40px;
+}
+
 /* nav */
-/* line 136, ../scss/style.scss */
+/* line 177, ../scss/style.scss */
 nav {
   background-color: #8dc72d;
 }
 
-/* line 140, ../scss/style.scss */
+/* line 181, ../scss/style.scss */
 nav ul {
   text-align: center;
 }
 
-/* line 144, ../scss/style.scss */
+/* line 185, ../scss/style.scss */
 nav li {
   display: inline-block;
 }
 
-/* line 148, ../scss/style.scss */
+/* line 189, ../scss/style.scss */
 nav a {
   display: block;
   padding: 15px;
@@ -172,18 +222,41 @@ nav a {
   text-decoration: none;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.16);
 }
-/* line 153, ../scss/style.scss */
+/* line 194, ../scss/style.scss */
 nav a:hover, nav a.menu_actif {
   color: #324a09;
 }
 
-/* line 158, ../scss/style.scss */
+/* line 199, ../scss/style.scss */
+.menu_actif {
+  position: relative;
+}
+
+/* line 203, ../scss/style.scss */
+.menu_actif:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  /* Au pif pour les navigateurs qui comprennent pas calc du tout*/
+  left: -moz-calc(50% - 4px);
+  left: -webkit-calc(50% - 4px);
+  left: calc(50% - 4px);
+}
+
+/* line 219, ../scss/style.scss */
 nav .menu_disable {
   color: #b9de7c;
   text-shadow: none;
   cursor: default;
 }
-/* line 161, ../scss/style.scss */
+/* line 222, ../scss/style.scss */
 nav .menu_disable:hover {
   color: #b9de7c;
 }
@@ -191,44 +264,44 @@ nav .menu_disable:hover {
 /***************/
 /* Page Rally */
 /*************/
-/* line 169, ../scss/style.scss */
+/* line 230, ../scss/style.scss */
 .page_rally li {
   border-bottom: 1px solid #e3e3e3;
   display: table;
   width: 100%;
 }
 
-/* line 175, ../scss/style.scss */
+/* line 236, ../scss/style.scss */
 .page_rally li > span {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 180, ../scss/style.scss */
+/* line 241, ../scss/style.scss */
 .page_rally li > span:first-child {
   display: table-cell;
   background-color: #ccd1d4;
   font-size: 1.8em;
   color: #56636c;
-  padding: 0.5em;
-  width: 30px;
+  padding: 0.4em;
+  width: 50px;
   text-align: center;
 }
 
-/* line 190, ../scss/style.scss */
+/* line 251, ../scss/style.scss */
 .page_rally li > span + span {
   padding-left: 20px;
   color: #56636c;
 }
 
-/* line 195, ../scss/style.scss */
+/* line 256, ../scss/style.scss */
 .page_rally li > span + span + span {
   width: 100px;
   text-align: center;
   padding: 0 5px 0 15px;
 }
 
-/* line 201, ../scss/style.scss */
+/* line 262, ../scss/style.scss */
 .page_rally li span p + p {
   font-size: 0.7em;
 }

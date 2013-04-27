@@ -1,10 +1,10 @@
 <header>
 	<div class="wrapper">
-		<span aria-hidden="true" class="icon-trophy"></span><a href="#">Classement général</a>
+		<a href="#" class="icon-trophy" title="Classement général"></a>
 		<h1>Vodafone Rally de Portugal</h1>
 		<div id="check_refresh">
-			<label for="refresh">Auto-refresh:</label>
-			<input id="refresh" type="checkbox" checked="true" />	
+			<input id="refresh" type="checkbox" checked="true" />
+			<label for="refresh"><span aria-hidden="true" class="icon-loop-alt2"></span></label>
 		</div>
 	</div>
 </header>

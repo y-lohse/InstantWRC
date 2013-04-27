@@ -52,7 +52,6 @@ $header-color:#242529;
 $main-color:#8dc72d;
 $padding_20:3.3333%; /* 20/600 */
 
-
 /* Typo */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:600,700);
@@ -66,6 +65,12 @@ $padding_20:3.3333%; /* 20/600 */
 		url('../fonts/icomoon.svg#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
+}
+
+*{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 html{
@@ -122,13 +127,49 @@ header{
     padding: 10px $padding_20;
 }
 
+header > div{
+    display: table;
+    width:100%;
+}
+
+header h1{
+    color:#c6cabd;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.16);
+    font-size: 1.1em;
+    text-align: center;
+}
+
 header .wrapper > *{
     display: table-cell;
     vertical-align: middle;
 }
 
-label[for="refresh"]{
+#refresh{
     display: none;
+}
+
+label[for="refresh"]{
+    cursor: pointer;
+}
+
+#refresh:checked + label .icon-loop-alt2{
+    color:$main-color;
+}
+
+#refresh + label .icon-loop-alt2{
+    color:#c02436;
+}
+
+.icon-trophy, .icon-loop-alt2{
+    color:#c6cabd;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.16);
+    text-decoration: none;
+    font-size: 1.5em;
+    padding:10px;
+}
+
+.icon-trophy, #check_refresh{
+    width:40px;
 }
 
 /* nav */
@@ -153,6 +194,26 @@ nav a{
     &:hover,&.menu_actif{color:#324a09;};
     text-decoration:none;
     text-shadow: 2px 2px 1px rgba(0,0,0,0.16);
+}
+
+.menu_actif{
+    position: relative;
+}
+
+.menu_actif:before{
+    content:'';
+    display: block;
+    width: 0; 
+    height: 0; 
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;	
+    border-bottom: 8px solid white;
+    position: absolute;
+    bottom:0;
+    left:40%; /* Au pif pour les navigateurs qui comprennent pas calc du tout*/
+    left:-moz-calc(50% - 4px);
+    left:-webkit-calc(50% - 4px);
+    left:calc(50% - 4px);
 }
 
 nav .menu_disable{
@@ -182,8 +243,8 @@ nav .menu_disable{
     background-color:#ccd1d4;
     font-size: 1.8em;
     color:#56636c;
-    padding:0.5em;
-    width: 30px;
+    padding:0.4em;
+    width: 50px;
     text-align: center;
 }
 
