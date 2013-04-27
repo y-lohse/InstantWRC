@@ -10,6 +10,8 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<link rel="stylesheet" href="css/style.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
 	<?php echo $this->fetch('content'); ?>

@@ -1,5 +1,6 @@
 Config/database.php
 tmp/
+webroot/scss/config
 
 #################
 ## Eclipse
