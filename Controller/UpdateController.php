@@ -72,14 +72,33 @@ class UpdateController extends AppController {
 			}
 		}
 		else{
-			debug('setup ok');
+			$stages = $this->Stage->findAllByFkRallyId($rally_id);
+			
 			//le setup a été fait, faut il mettre à jour la liste des spéciales?
-			//@TODO : décider s'il faut ou non faire la mise à jour
-			//il faut se baser sur le tempsannoncé du départ de la spéciale
 			$needsUpdate = false;
+			$now = new DateTime();
+			
+			foreach ($stages as $stage){
+				if ($stage['Stage']['stage_status'] == RALLy_STATUS_UPCOMING){
+					$schedule = new DateTime($stage['Stage']['stage_scheduled']);
+					$diff = $schedule->diff($now);
+					
+					if ($diff->invert === 0){
+						//la spéciale est théoriquement commencée,
+						//mais en BDD elle est toujours annoncé comme à venir
+						$updated = new DateTime($stage['Stage']['stage_updated']);
+						$updateDiff = $updated->diff($now);
+						if ($updateDiff->i >= STAGELIST_UPDATE_DELAY){
+							$needsUpdate = true;
+							break;
+						}
+					}	
+				}	
+			}
 				
 			if ($needsUpdate){
 				//@TODO : faire la mise à jour
+				debug('update stagelist');
 			}
 		}
 	}
