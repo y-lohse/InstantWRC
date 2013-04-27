@@ -21,82 +21,13 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
-		<li>
-			<span>1</span>
-			<span>S.OGIER</span>	
-		</li>
-		
-		<li>
-			<span>12</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+15:04.25</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
+		<li ng-repeat="time in times">
 			<span>2</span>
-			<span>M. HIRVONEN</span>
+			<span>{{time.driver}}</span>
 			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
+				<p>{{time.time}}</p>
+				<p>+0</p>
+			</span>	
 		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-				
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-				<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-				
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-	
 	</ol>	
 </div>	<!--#content-->
