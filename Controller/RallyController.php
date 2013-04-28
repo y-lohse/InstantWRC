@@ -1,10 +1,20 @@
 <?php
 class RallyController extends AppController {
-	public $uses = array('Stage', 'Overall', 'StageTime');
+	public $uses = array('Stage', 'Overall', 'StageTime', 'Rally');
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
 		//$this->RequestHandler->renderAs($this, 'json');
+	}
+	
+	public function running(){
+		$running = $this->Rally->getRunningRally(new DateTime());
+		if (count($running) > 0)
+			$this->set('id', $running['Rally']['id']);
+		else
+			$this->set('id', NULL);
+		
+		$this->set('_serialize', array('id'));
 	}
 	
 	public function view($rally_id){
