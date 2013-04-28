@@ -24,7 +24,7 @@
 		<li ng-repeat="time in times">
 			<span>{{time.rank}}</span>
 			<span>{{time.driver}}</span>
-			<span>
+			<span ng-hide="time.rank == 1 || time.retired">
 				<p>+{{time.best}}</p>
 				<p>+{{time.previous}}</p>
 			</span>	
