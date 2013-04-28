@@ -1,4 +1,4 @@
-var InstantWRC = angular.module('InstantWRC', ['p2r']);
+var InstantWRC = angular.module('InstantWRC', ['directives']);
 InstantWRC.run(function($http, $location, $rootScope){
 	$http.get('/rally/running.json').success(function(data){
 		if (data.id){
