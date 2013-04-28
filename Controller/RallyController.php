@@ -18,8 +18,14 @@ class RallyController extends AppController {
 									 'retired'=>(bool)$time['Overall']['retired'],
 									 'last_stage'=>$time[0]['last_stage_id']));
 		}
-		//debug($times);
+		
 		usort($times, array($this, 'sortTimes'));
+		
+		foreach ($times as $index=>&$time){
+			if ($time['retired']) continue;
+			
+			$time['rank'] = $index+1;
+		}
 	
 		$this->set('times', $times);
 		$this->set('_serialize', array('times'));

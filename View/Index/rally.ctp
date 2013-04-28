@@ -22,7 +22,7 @@
 <div id="content" class="page_rally">
 	<ol class="wrapper">
 		<li ng-repeat="time in times">
-			<span>2</span>
+			<span>{{time.rank}}</span>
 			<span>{{time.driver}}</span>
 			<span>
 				<p>{{time.time}}</p>
