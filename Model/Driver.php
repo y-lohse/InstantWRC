@@ -42,7 +42,14 @@ class Driver extends AppModel{
 						'joins'=>$joins,
 						'conditions'=>$conditions,
 						'group'=>$group);
-		return $this->find('all', $params);
+		$results = $this->find('all', $params);
+		$retirees = array();
+		
+		foreach ($results as $result){
+			array_push($retirees, $result['Driver']['id']);
+		}
+		
+		return $retirees;
 	}
 	
 	public function countStageTimes($stage_id){

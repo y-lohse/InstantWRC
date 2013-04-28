@@ -51,7 +51,7 @@ class UpdateController extends AppController {
 					
 					if ($prev_stage_id != NULL){//sinon c'est qu'il n'y a pas eu de spéciale avant
 						$retirements = $this->Driver->computeRetirements($stage['Stage']['stage_id'], $prev_stage_id);
-						
+						$this->Overall->retire($rally_id, $retirements);
 					}
 				}
 			}
