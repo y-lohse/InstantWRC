@@ -18,7 +18,8 @@ class UpdateController extends AppController {
 		$this->initStages($rally_id, $wrcInterface);
 		
 		$stages = $this->Stage->findAllByFkRallyId($rally_id);
-		foreach ($stages as $stage){
+		foreach ($stages as $index=>$stage){
+			if ($index == 0) continue;
 			if ($stage['Stage']['stage_status'] == RALLy_STATUS_UPCOMING){
 				//cette spéciale n'a pas commencé, donc les suivantes non plus, donc on arrete la
 				break;
@@ -32,6 +33,11 @@ class UpdateController extends AppController {
 					//spéciale terminée, mais les résultats n'ont pas encore été chargés
 					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
 				}
+				else{
+					//la spéciale est terminé,e on a déja des temps
+					//c'est le moment de détecter das abandons
+					
+				}
 			}
 			else if ($stage['Stage']['stage_status'] == RALLy_STATUS_RUNNING){
 				//spéciale en cours
@@ -44,6 +50,7 @@ class UpdateController extends AppController {
 					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
 				}
 			}
+			break;
 		}
 		
 		exit();
