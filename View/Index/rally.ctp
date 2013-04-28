@@ -1,7 +1,7 @@
 <header>
 	<div class="wrapper">
 		<a href="#/ranking" class="icon-trophy" title="Classement général"></a>
-		<h1>Vodafone Rally de Portugal</h1>
+		<h1>{{ rally_name }}</h1>
 		<div id="check_refresh">
 			<input id="refresh" type="checkbox" checked="true" />
 			<label for="refresh"><span aria-hidden="true" class="icon-loop-alt2"></span></label>

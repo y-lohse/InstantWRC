@@ -9,12 +9,14 @@ class RallyController extends AppController {
 	
 	public function running(){
 		$running = $this->Rally->getRunningRally(new DateTime());
-		if (count($running) > 0)
+		if (count($running) > 0){
 			$this->set('id', $running['Rally']['id']);
+			$this->set('name', $running['Rally']['name']);
+		}
 		else
 			$this->set('id', NULL);
 		
-		$this->set('_serialize', array('id'));
+		$this->set('_serialize', array('id', 'name'));
 	}
 	
 	public function view($rally_id){
