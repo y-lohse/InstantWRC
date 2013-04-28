@@ -13,8 +13,18 @@ class RallyController extends AppController {
 		$rawTimes = $this->Overall->getOverALlTimes($rally_id);
 		$times = array();
 		foreach ($rawTimes as $time){
+			//conversion du chrono en timestamp (en dizieme de secondes)
+			$splitted = preg_split('/[:.]/', $time['Overall']['time']);
+			$timestamp = 0;
+			$splitted = array_reverse($splitted);
+			
+			if (count($splitted) === 4) $timestamp += $splitted[3]*60*60*10;
+			if (count($splitted) >= 3) $timestamp += $splitted[2]*60*10;
+			$timestamp += $splitted[1]*10 + $splitted[0];
+			
 			array_push($times, array('driver'=>$time['Driver']['name'],
 									 'time'=>$time['Overall']['time'],
+									 'timestamp'=>$timestamp,
 									 'retired'=>(bool)$time['Overall']['retired'],
 									 'last_stage'=>$time[0]['last_stage_id']));
 		}
@@ -31,20 +41,15 @@ class RallyController extends AppController {
 		$this->set('_serialize', array('times'));
 	}
 	
-	//classement parchrno
+	//classement des pilotes par différents critères
 	private function sortTimes($a, $b){
 		//comapraison par élmination
 		if ($a['retired'] != $b['retired']){
-			return ($a['retired']) ?1 : -1;
+			return ($a['retired']) ? 1 : -1;
 		}
 		
 		//comparaison au temps
-		if (strlen($a['time']) === strlen($b['time'])){
-			return ($a['time'] > $b['time']) ? 1 : -1;
-		}
-		else{
-			return (strlen($a['time']) > strlen($b['time'])) ? 1 : -1;
-		}
+		return ($a['timestamp'] > $b['timestamp']) ? 1 : -1;
 	}
 	
 	public function stages($id){
