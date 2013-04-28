@@ -45,12 +45,14 @@ class Stage extends AppModel{
 						'stage_name'=>'name',
 						'stage_distance'=>'distance',
 						'stage_scheduled'=>'scheduled',
-						'stage_status'=>'status',
-						'stage_order'=>'order');
+						'stage_status'=>'status');
+		
 		$conditions = array('fk_rally_id'=>$rally_id);
+		$order = array('stage_order');
 		
 		$params= array('fields'=>$this->fieldsAs($fields),
-						'conditions'=>$conditions);
+						'conditions'=>$conditions,
+						'order'=>$order);
 		return $this->find('all', $params);
 	}
 }
