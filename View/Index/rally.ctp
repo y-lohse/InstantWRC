@@ -19,7 +19,7 @@
 	</div>
 </nav>
 
-<div id="content" class="page_rally">
+<div id="content" class="page_rally" data-pull>
 	<ol class="wrapper">
 		<li ng-repeat="time in times">
 			<span>{{time.rank}}</span>
