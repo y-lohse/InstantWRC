@@ -10,6 +10,41 @@ class Driver extends AppModel{
 		return $this->save();
 	}
 	
+	//calcule les abandons entre 2 spéciales
+	public function computeRetirements($current_stage, $previous_stage){
+		$fields = array('Driver.driver_id'=>'id');
+		
+		$joins = array(
+				array(
+						'table'=>'stage_time',
+						'alias'=>'Stage',
+						'type'=>'LEFT',
+						'conditions'=>array(
+								'Stage.fk_driver_id = '.$this->alias.'.'.$this->primaryKey,
+								'Stage.fk_stage_id = '.$current_stage
+						)),
+				array(
+						'table'=>'stage_time',
+						'alias'=>'PreviousStage',
+						'type'=>'LEFT',
+						'conditions'=>array(
+								'PreviousStage.fk_driver_id = '.$this->alias.'.'.$this->primaryKey
+						)),
+		);
+		
+		$conditions = array();
+		$conditions['PreviousStage.fk_stage_id'] = $previous_stage;
+		$conditions['Stage.fk_driver_id'] = NULL;
+		
+		$group = array('Driver.driver_id');
+		
+		$params = array('fields'=>$this->fieldsAs($fields),
+						'joins'=>$joins,
+						'conditions'=>$conditions,
+						'group'=>$group);
+		return $this->find('all', $params);
+	}
+	
 	public function countStageTimes($stage_id){
 		$joins = array(
 				array(
