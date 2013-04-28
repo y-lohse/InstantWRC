@@ -69,27 +69,5 @@ class Driver extends AppModel{
 						'conditions'=>$conditions);
 		return $this->find('count', $params);
 	}
-	
-	public function getStageTimes($stage_id){
-		$fields = array('Driver.driver_name'=>'name',
-						 'StageTIme.stage_time_time'=>'time');
-		
-		$joins = array(
-				array(
-						'table'=>'stage_time',
-						'alias'=>'StageTime',
-						'type'=>'LEFT',
-						'conditions'=>array(
-								'StageTime.fk_driver_id = '.$this->alias.'.'.$this->primaryKey
-						))
-		);
-		
-		$conditions = array('StageTime.fk_stage_id'=>$stage_id);
-		
-		$params = array('fields'=>$this->fieldsAs($fields),
-				'joins'=>$joins,
-				'conditions'=>$conditions);
-		return $this->find('all', $params);
-	}
 }
 ?>
