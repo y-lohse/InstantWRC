@@ -17,9 +17,9 @@ class UpdateController extends AppController {
 		//création ou mAJ de la liste des spéciales
 		$this->initStages($rally_id, $wrcInterface);
 		
+		//@TODO : récupérer lesspéciales par ordre de passage
 		$stages = $this->Stage->findAllByFkRallyId($rally_id);
-		foreach ($stages as $index=>$stage){
-			if ($index == 0) continue;
+		foreach ($stages as $count=>$stage){
 			if ($stage['Stage']['stage_status'] == RALLy_STATUS_UPCOMING){
 				//cette spéciale n'a pas commencé, donc les suivantes non plus, donc on arrete la
 				break;
@@ -33,10 +33,25 @@ class UpdateController extends AppController {
 					//spéciale terminée, mais les résultats n'ont pas encore été chargés
 					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
 				}
-				else{
+				else if ($count > 0){
 					//la spéciale est terminé,e on a déja des temps
 					//c'est le moment de détecter das abandons
 					
+					//on recupere la derniere spéciale a s'etre terminée
+					$index = $count-1;
+					$prev_stage_id = NULL;
+					do {
+						$prev_stage = $stages[$index];
+						if ($prev_stage['Stage']['stage_status'] == RALLy_STATUS_COMPLETED){
+							$prev_stage_id = $prev_stage['Stage']['stage_id'];
+							break;
+						}
+					}
+					while (--$index >= 0);
+					
+					if ($prev_stage_id != NULL){//sinon c'est qu'il n'y a pas eu de spéciale avant
+						
+					}
 				}
 			}
 			else if ($stage['Stage']['stage_status'] == RALLy_STATUS_RUNNING){
@@ -50,7 +65,6 @@ class UpdateController extends AppController {
 					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
 				}
 			}
-			break;
 		}
 		
 		exit();
