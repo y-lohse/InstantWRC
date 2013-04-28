@@ -18,6 +18,3 @@ InstantWRC.controller('StageController', function($scope, $http, $routeParams){
 		$scope.times = data.times;
 	});
 });
-
-InstantWRC.controller('ForecastController', function(){
-});

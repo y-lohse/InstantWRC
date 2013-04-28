@@ -30,11 +30,5 @@ InstantWRC.config(['$routeProvider', function($routeProvider) {
 	when('/stage/:stageId', {
 		templateUrl: '/index/stage', 
 		controller: 'StageController'
-	}).
-	when('/forecast', {
-		templateUrl: '/index/forecast', 
-		controller: 'ForecastController'
 	});
-	//.
-	//otherwise({redirectTo: 'home'});
 }]);

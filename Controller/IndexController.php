@@ -19,9 +19,5 @@ class IndexController extends AppController {
 	public function stage(){
 		$this->layout = '';
 	}
-	
-	public function forecast(){
-		$this->layout = '';
-	}
 }
 ?>
