@@ -25,8 +25,8 @@
 			<span>{{time.rank}}</span>
 			<span>{{time.driver}}</span>
 			<span>
-				<p>{{time.time}}</p>
-				<p>+0</p>
+				<p>+{{time.best}}</p>
+				<p>+{{time.previous}}</p>
 			</span>	
 		</li>
 	</ol>	
