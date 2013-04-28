@@ -58,10 +58,19 @@ class RallyController extends AppController {
 		return ($a['timestamp'] > $b['timestamp']) ? 1 : -1;
 	}
 	
-	public function stages($id){
-		$rawStages = $this->Stage->getSTages($id);
+	public function stages($stage_id){
+		$stage_id = (int)$stage_id;
+		$stage = $this->Stage->findByStageId($stage_id);
+		$rally_id = $stage['Stage']['fk_rally_id'];
+		$timezone = $this->Rally->getTimezone($rally_id);
+		
+		$rawStages = $this->Stage->getStages($stage_id);
 		$stages= array();
-		foreach ($rawStages as $stage){
+		foreach ($rawStages as &$stage){
+			$scheduled = new DateTime($stage['Stage']['scheduled']);
+			$scheduled->setTimezone(new DateTimeZone($timezone));
+			$stage['Stage']['scheduled'] = $scheduled->format('H:i');
+			
 			array_push($stages, $stage['Stage']);
 		}
 		
