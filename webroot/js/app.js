@@ -3,6 +3,7 @@ InstantWRC.run(function($http, $location, $rootScope){
 	$http.get('/rally/running.json').success(function(data){
 		if (data.id){
 			$rootScope.rally_id = data.id;
+			$rootScope.rally_name = data.name;
 			$location.path('/rally');
 		}
 	});
