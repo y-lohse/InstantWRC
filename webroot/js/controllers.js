@@ -2,7 +2,7 @@ InstantWRC.controller('RankingController', function(){
 });
 
 InstantWRC.controller('RallyController', function($scope, $http){
-	$http.get('/rally/1.json').success(function(data){
+	$http.get('/rally/'+$scope.rally_id+'.json').success(function(data){
 		$scope.times = data.times;
 	});
 });
