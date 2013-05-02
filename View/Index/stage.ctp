@@ -1,7 +1,7 @@
 <header>
 	<div class="wrapper">
 		<a href="#/ranking" class="icon-trophy" title="Classement g�n�ral"></a>
-		<h1>[SS16] Vodafone Rally de Portugal</h1>
+		<h1>{{ rally_name }}</h1>
 		<div id="check_refresh">
 			<input id="refresh" type="checkbox" checked="true" />
 			<label for="refresh"><span aria-hidden="true" class="icon-loop-alt2"></span></label>
@@ -21,19 +21,17 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
-		<li class="table">
-			<span class="cell">1</span>
-			<span class="cell">S.OGIER</span>	
+		<li ng-repeat="time in times" class="table">
+			<span class="cell">
+				{{ time.rank }}
+			</span>
+			<span class="cell">
+				{{ time.driver }}
+			</span>
+			<span class="cell last-col" ng-hide="time.rank == 1 || time.retired">
+				<p>+{{ time.best }}</p>
+				<p class="small-text">+{{ time.previous }}</p>
+			</span>	
 		</li>
-		
-		<li class="table">
-			<span class="cell">12</span>
-			<span class="cell">M. HIRVONEN</span>
-			<span class="cell last-col">
-				<p>+15:04.25</p>
-				<p class="small-text">+53.2</p>
-			</span>		
-		</li>
-	
 	</ol>	
 </div>	<!--#content-->

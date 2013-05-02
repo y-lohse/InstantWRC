@@ -4,7 +4,7 @@ class RallyController extends AppController {
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
-		//$this->RequestHandler->renderAs($this, 'json');
+		$this->RequestHandler->renderAs($this, 'json');
 	}
 	
 	public function running(){
