@@ -30,7 +30,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                        <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
 		</li>
 		<li>
                         <span class="stage_finished">
@@ -41,7 +41,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                        <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
 		</li>
                 <li>
                         <span class="stage_finished">
@@ -52,7 +52,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                        <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
 		</li>
                 		<li>
                         <span class="stage_finished">
@@ -63,7 +63,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                        <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
 		</li>
                 <li>
                         <span class="stage_finished">
@@ -74,7 +74,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                       <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
 		</li>
                 <li>
                         <span class="stage_later">
@@ -85,7 +85,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                        <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
 
 		</li>
                 <li>
@@ -97,7 +97,7 @@
                             SS6 Santana da Serra 1
                             <span>31.12km</span>  
                         </p>
-                        <span><a href="#"><span class="icon-play"></span></a></span>
+                        <span><a href="#/stage/1"><span class="icon-play"></span></a></span>
                 </li>
 
 
