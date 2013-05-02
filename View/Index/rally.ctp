@@ -21,6 +21,9 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
+		<li class="after_new_stage">
+			After SS6 Santana da Serra 1 (running)
+		</li>
 		<li>
 			<span>1</span>
 			<span>S.OGIER</span>	
@@ -42,6 +45,10 @@
 				<p>+52.2</p>
 				<p>+53.2</p>
 			</span>		
+		</li>
+		
+		<li class="before_new_stage">
+			Before SS6 Santana da Serra 1 (running)
 		</li>
 		
 		<li>
