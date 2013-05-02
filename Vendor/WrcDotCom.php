@@ -62,11 +62,16 @@ class WrcDotCom{
 			
 			switch ($infos->item(4)->nodeValue){
 				case 'COMPLETED':
+				case 'COMPLETE':
 					$status = RALLy_STATUS_COMPLETED;
 					break;
 				case 'CANCELLED':
 					$status = RALLy_STATUS_CANCELLED;
 					break;
+				case 'RUNNING':
+					$status = RALLy_STATUS_RUNNING;
+					break;
+				case 'TO RUN':
 				default:
 					$status = RALLy_STATUS_UPCOMING;
 					break;
