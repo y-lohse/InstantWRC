@@ -242,8 +242,7 @@ nav .menu_disable{
 /* Page Rally = tableau basique*/
 /*******************************/
 
-#content li,
-#content li > a{
+#content .table{
     display: table;
     width:100%;
 }

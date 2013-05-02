@@ -10,25 +10,6 @@ InstantWRC.controller('RallyController', function($scope, $http){
 InstantWRC.controller('StagesController', function($scope, $http){
 	$http.get('/rally/stages/'+$scope.rally_id+'.json').success(function(data){
 		$scope.stages = data.stages;
-		
-		for (var i = 0; i < $scope.stages.length; i++){
-			var cssClass;
-			
-			switch (parseInt($scope.stages[i].status)){
-				case 2:
-					cssClass = 'stage_finished';
-					break;
-				case 1:
-					cssClass = 'stage_running';
-					break;
-				case 0:
-				default:
-					cssClass = 'stage_later';
-					break;
-			}
-			console.log(cssClass);
-			$scope.stages[i].cssClass = cssClass;
-		}
 	});
 });
 

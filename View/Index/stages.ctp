@@ -22,51 +22,64 @@
 
 <div id="content" class="page_stages">
 	<ol class="wrapper">
-		<li>
-			<a href="#/stage/1">
-				<span class="cell stage-status">
-					<span class="icon-play"></span>
-					<p>Running</p>
-				</span>
-				<p class="cell">
-					SS6 Santana da Serra 1
-					<span class="small-text">31.12km</span>  
-				</p>
-				<span class="cell last-col icon-play"></span>
-			</a>
-		</li> 
-		<li>
-			<a href="#/stage/1">
-				<span class="cell stage-status">
-					<span class="icon-trophy"></span>
-					<p>Finished</p>
-				</span>
-				<p class="cell">
-					SS6 Santana da Serra 1
-					<span class="small-text">31.12km</span>  
-				</p>
-				<span class="cell last-col icon-play"></span>
-			</a>
+		<li ng-repeat="stage in stages">
+			<div ng-switch="stage.status">
+				<?php //not started ?>
+				<div ng-switch-when="0" class="table">
+					<span class="cell stage-status">
+						<span class="icon-clock"></span>
+						<p>08:25 <span>am</span></p>
+					</span>
+					<p class="cell">
+						SS6 Santana da Serra 1
+						<span class="small-text">31.12km</span>  
+					</p>
+				</div>
+				
+				<?php //running ?>
+				<a ng-switch-when="1" href="#/stage/1" class="table">
+					<span class="cell stage-status">
+						<span class="icon-play"></span>
+						<p>Running</p>
+					</span>
+					<p class="cell">
+						{{ stage.name }}
+						<span class="small-text">
+							{{ stage.distance }}km
+						</span>
+					</p>
+					<span class="cell last-col icon-play"></span>
+				</a>
+				
+				<?php //completed ?>
+				<a ng-switch-when="2" href="#/stage/1" class="table">
+					<span class="cell stage-status">
+						<span class="icon-trophy"></span>
+						<p>Finished</p>
+					</span>
+					<p class="cell">
+						{{ stage.name }}
+						<span class="small-text">
+							{{ stage.distance }}km
+						</span>
+					</p>
+					<span class="cell last-col icon-play"></span>
+				</a>
+				
+				<?php //cancelled ?>
+				<div ng-switch-when="4" class="table">
+					<span class="cell stage-status">
+						<span class="icon-x"></span>
+						<p>Canceled</p>
+					</span>
+					<p class="cell">
+						{{ stage.name }}
+						<span class="small-text">
+							{{ stage.distance }}km
+						</span>
+					</p>
+				</div>
+			</div>
 		</li>
-		<li>
-			<span class="cell stage-status">
-				<span class="icon-clock"></span>
-				<p>08:25 <span>am</span></p>
-			</span>
-			<p class="cell">
-				SS6 Santana da Serra 1
-				<span class="small-text">31.12km</span>  
-			</p>
-		</li>
-		<li>
-			<span class="cell stage-status">
-				<span class="icon-x"></span>
-				<p>Canceled</p>
-			</span>
-			<p class="cell">
-				SS6 Santana da Serra 1
-				<span class="small-text">31.12km</span>  
-			</p>
-		</li>	
 	</ol>	
 </div>	<!--#content-->

@@ -21,12 +21,12 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
-		<li>
+		<li class="table">
 			<span class="cell">1</span>
 			<span class="cell">S.OGIER</span>	
 		</li>
 		
-		<li>
+		<li class="table">
 			<span class="cell">12</span>
 			<span class="cell">M. HIRVONEN</span>
 			<span class="cell last-col">
