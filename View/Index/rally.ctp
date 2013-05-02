@@ -29,5 +29,11 @@
 				<p>+{{time.previous}}</p>
 			</span>	
 		</li>
+		<li class="after_new_stage">
+			After SS6 Santana da Serra 1 (running)
+		</li>
+		<li class="before_new_stage">
+			Before SS6 Santana da Serra 1 (running)
+		</li>
 	</ol>	
 </div>	<!--#content-->
