@@ -11,7 +11,7 @@
 
 <nav>
 	<div class="wrapper">
-		<ul >
+		<ul>
 			<li><a href="#/rally" class="menu_actif">Results</a></li>
 			<li><a href="#/stages">Stages</a></li>
 			<li><a href="#" class="menu_disable">Prevision</a></li>
@@ -21,12 +21,16 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
-		<li ng-repeat="time in times">
-			<span>{{time.rank}}</span>
-			<span>{{time.driver}}</span>
-			<span ng-hide="time.rank == 1 || time.retired">
-				<p>+{{time.best}}</p>
-				<p>+{{time.previous}}</p>
+		<li ng-repeat="time in times" class="table">
+			<span class="cell">
+				{{ time.rank }}
+			</span>
+			<span class="cell">
+				{{ time.driver }}
+			</span>
+			<span class="cell last-col" ng-hide="time.rank == 1 || time.retired">
+				<p>+{{ time.best }}</p>
+				<p class="small-text">+{{ time.previous }}</p>
 			</span>	
 		</li>
 		<li class="after_new_stage">

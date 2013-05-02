@@ -45,7 +45,7 @@ table {
 }
 
 /************/
-/* Général  */
+/* GÃ©nÃ©ral  */
 /***********/
 
 $header-color:#242529;
@@ -124,7 +124,7 @@ p{
 }
 
 /***************************/
-/* Mise en page générale  */
+/* Mise en page gÃ©nÃ©rale  */
 /**************************/
 
 .wrapper{
@@ -242,55 +242,41 @@ nav .menu_disable{
 /* Page Rally = tableau basique*/
 /*******************************/
 
-#content li,
-#content li > a{
+#content .table{
     display: table;
-    width:100%;    
+    width:100%;
 }
 
 #content li{
     border-bottom: 1px solid #e3e3e3;
 }
 
-#content li > span,
-#content li > p,
-#content li > a > span,
-#content li > a > p{
-    display: table-cell;
+#content li .cell{
+	display: table-cell;
     vertical-align: middle;
-}
-
-#content li > span:first-child,
-#content li > a > span:first-child{
-    display: table-cell;
-    background-color:#ccd1d4;
+	padding-left:20px;
     color:#56636c;
-    text-align: center;
+
+	&:first-child{
+		padding-left:0;
+		background-color:#ccd1d4;
+    	color:#56636c;
+    	text-align: center;
+	}
 }
 
-#content li > span + span,
-#content li > span + p,
-#content li > a > span + span,
-#content li > a > span + p{
-    padding-left:20px;
-    color:#56636c;
-}
-
-#content li > span + span + span,
-#content li > a > span + span + span{
+#content .last-col{
     width: 100px;
     text-align: center;
     padding: 0 5px 0 15px;
 }
 
-#content li span p + p,
-#content li > a span p + p{
+#content .small-text{
     font-size: 0.7em;
 }
 
 /* Page rally */
-
-.page_rally li > span:first-child{
+#content.page_rally .cell:first-child{
     font-size: 1.8em;
     padding:0.4em;
     width: 50px;
@@ -302,7 +288,7 @@ nav .menu_disable{
     text-align: center;
     padding:0.6em 0.4em;
     color:#eff3f6;
-    }
+}
 
 /* Page stages */
 
@@ -311,16 +297,14 @@ nav .menu_disable{
     color:inherit;
 }
 
-.page_stages li > a > span:first-child,
-.page_stages li > span:first-child{
+.page_stages .stage-status{
     font-size: 0.8em;
     width: 60px;
     padding:1.1em 0.2em;
     text-align: center;
 }
 
-.page_stages li > a > span:first-child,
-.page_stages li > span:first-child{
+.page_stages .stage-status{
     .icon-trophy,
     .icon-play,
     .icon-clock,
@@ -333,30 +317,10 @@ nav .menu_disable{
     }
 }
 
-.page_stages li > a > p span,
-.page_stages li > p span{
+.page_stages .small-text,{
     display:block;
-    font-size: 0.7em;
 }
 
-.page_stages li > a > span:last-child,
-.page_stages li > span:last-child{
-    width: 40px;
+.page_stages .last-col{
+	width: 40px;
 }
-
-.page_stages li > a > span:last-child a,
-.page_stages li > span:last-child a{
-    display: block;
-    padding:15px;
-    color:#56636c;
-    text-decoration:none;
-}
-
-.stage_canceled ~ span,
-.stage_later ~ span{ 
-    visibility:hidden;
-}
-
-   
-
-
