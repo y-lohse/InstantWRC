@@ -24,50 +24,49 @@
 	<ol class="wrapper">
 		<li>
 			<a href="#/stage/1">
-				<span class="cell stage_running">
+				<span class="cell stage-status">
 					<span class="icon-play"></span>
 					<p>Running</p>
 				</span>
 				<p class="cell">
 					SS6 Santana da Serra 1
-					<span>31.12km</span>  
+					<span class="small-text">31.12km</span>  
 				</p>
 				<span class="cell last-col icon-play"></span>
 			</a>
 		</li> 
 		<li>
 			<a href="#/stage/1">
-				<span class="cell stage_finished">
+				<span class="cell stage-status">
 					<span class="icon-trophy"></span>
 					<p>Finished</p>
 				</span>
 				<p class="cell">
 					SS6 Santana da Serra 1
-					<span>31.12km</span>  
+					<span class="small-text">31.12km</span>  
 				</p>
 				<span class="cell last-col icon-play"></span>
 			</a>
 		</li>
 		<li>
-			<span class="cell stage_later">
+			<span class="cell stage-status">
 				<span class="icon-clock"></span>
 				<p>08:25 <span>am</span></p>
 			</span>
 			<p class="cell">
 				SS6 Santana da Serra 1
-				<span>31.12km</span>  
+				<span class="small-text">31.12km</span>  
 			</p>
 		</li>
 		<li>
-			<span class="cell stage_canceled">
+			<span class="cell stage-status">
 				<span class="icon-x"></span>
 				<p>Canceled</p>
 			</span>
 			<p class="cell">
 				SS6 Santana da Serra 1
-				<span>31.12km</span>  
+				<span class="small-text">31.12km</span>  
 			</p>
-			<span class="icon-play"></span>
 		</li>	
 	</ol>	
 </div>	<!--#content-->
