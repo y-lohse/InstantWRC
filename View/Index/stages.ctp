@@ -1,7 +1,7 @@
 <header>
 	<div class="wrapper">
 		<a href="#/ranking" class="icon-trophy" title="Classement général"></a>
-		<h1>Vodafone Rally de Portugal</h1>
+		<h1>{{ rally_name }}</h1>
 		<div id="check_refresh">
 			<input id="refresh" type="checkbox" checked="true" /> <label
 				for="refresh"><span aria-hidden="true"
@@ -22,6 +22,22 @@
 
 <div id="content" class="page_stages">
 	<ol class="wrapper">
+		<li ng-repeat="stage in stages">
+			<span class="{{ stage.cssClass }}">
+				<span class="icon-play"></span>
+				<p>Running</p>
+			</span>
+			<p>
+				{{ stage.name }}
+				<span>{{ stage.distance }}km</span>
+			</p> 
+			<span>
+				<a href="#/stage/1">
+					<span class="icon-play"></span>
+				</a>
+			</span>
+		</li>
+		
 		<li>
 			<span class="stage_running">
 				<span class="icon-play"></span>
