@@ -28,16 +28,21 @@
 				<div ng-switch-when="0" class="table">
 					<span class="cell stage-status">
 						<span class="icon-clock"></span>
-						<p>08:25 <span>am</span></p>
+						<p>
+							{{ stage.scheduled }} 
+							<span>am</span>
+						</p>
 					</span>
 					<p class="cell">
-						SS6 Santana da Serra 1
-						<span class="small-text">31.12km</span>  
+						{{ stage.name }}
+						<span class="small-text">
+							{{ stage.distance }}km
+						</span> 
 					</p>
 				</div>
 				
 				<?php //running ?>
-				<a ng-switch-when="1" href="#/stage/1" class="table">
+				<a ng-switch-when="1" href="#/stage/{{ stage.id }}" class="table">
 					<span class="cell stage-status">
 						<span class="icon-play"></span>
 						<p>Running</p>
@@ -52,10 +57,10 @@
 				</a>
 				
 				<?php //completed ?>
-				<a ng-switch-when="2" href="#/stage/1" class="table">
+				<a ng-switch-when="2" href="#/stage/{{ stage.id }}" class="table">
 					<span class="cell stage-status">
 						<span class="icon-trophy"></span>
-						<p>Finished</p>
+						<p>Completed</p>
 					</span>
 					<p class="cell">
 						{{ stage.name }}
