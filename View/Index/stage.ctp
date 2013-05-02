@@ -29,9 +29,9 @@
 		<li>
 			<span class="cell">12</span>
 			<span class="cell">M. HIRVONEN</span>
-			<span class="cell">
+			<span class="cell last-col">
 				<p>+15:04.25</p>
-				<p>+53.2</p>
+				<p class="small-text">+53.2</p>
 			</span>		
 		</li>
 	

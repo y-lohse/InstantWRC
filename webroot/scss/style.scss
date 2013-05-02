@@ -255,39 +255,29 @@ nav .menu_disable{
 #content li .cell{
 	display: table-cell;
     vertical-align: middle;
-}
-
-#content li > span:first-child,
-#content li > a > span:first-child{
-    display: table-cell;
-    background-color:#ccd1d4;
+	padding-left:20px;
     color:#56636c;
-    text-align: center;
+
+	&:first-child{
+		padding-left:0;
+		background-color:#ccd1d4;
+    	color:#56636c;
+    	text-align: center;
+	}
 }
 
-#content li > span + span,
-#content li > span + p,
-#content li > a > span + span,
-#content li > a > span + p{
-    padding-left:20px;
-    color:#56636c;
-}
-
-#content li > span + span + span,
-#content li > a > span + span + span{
+#content .last-col{
     width: 100px;
     text-align: center;
     padding: 0 5px 0 15px;
 }
 
-#content li span p + p,
-#content li > a span p + p{
+#content .small-text{
     font-size: 0.7em;
 }
 
 /* Page rally */
-
-.page_rally li > span:first-child{
+#content.page_rally .cell:first-child{
     font-size: 1.8em;
     padding:0.4em;
     width: 50px;

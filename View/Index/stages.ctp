@@ -32,7 +32,7 @@
 					SS6 Santana da Serra 1
 					<span>31.12km</span>  
 				</p>
-				<span class="cell icon-play"></span>
+				<span class="cell last-col icon-play"></span>
 			</a>
 		</li> 
 		<li>
@@ -45,7 +45,7 @@
 					SS6 Santana da Serra 1
 					<span>31.12km</span>  
 				</p>
-				<span class="cell icon-play"></span>
+				<span class="cell last-col icon-play"></span>
 			</a>
 		</li>
 		<li>
