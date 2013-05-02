@@ -8,7 +8,7 @@ InstantWRC.controller('RallyController', function($scope, $http){
 });
 
 InstantWRC.controller('StagesController', function($scope, $http){
-	$http.get('/rally/1.json').success(function(data){
+	$http.get('/rally/stages/'+$scope.rally_id+'.json').success(function(data){
 		$scope.stages = data.stages;
 	});
 });
