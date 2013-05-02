@@ -22,9 +22,13 @@
 <div id="content" class="page_rally">
 	<ol class="wrapper">
 		<li ng-repeat="time in times">
-			<span>{{time.rank}}</span>
-			<span>{{time.driver}}</span>
-			<span ng-hide="time.rank == 1 || time.retired">
+			<span class="cell">
+				{{ time.rank }}
+			</span>
+			<span class="cell">
+				{{ time.driver }}
+			</span>
+			<span class="cell" ng-hide="time.rank == 1 || time.retired">
 				<p>+{{time.best}}</p>
 				<p>+{{time.previous}}</p>
 			</span>	

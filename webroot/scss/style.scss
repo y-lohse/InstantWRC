@@ -45,7 +45,7 @@ table {
 }
 
 /************/
-/* G�n�ral  */
+/* Général  */
 /***********/
 
 $header-color:#242529;
@@ -124,7 +124,7 @@ p{
 }
 
 /***************************/
-/* Mise en page g�n�rale  */
+/* Mise en page générale  */
 /**************************/
 
 .wrapper{
@@ -245,18 +245,15 @@ nav .menu_disable{
 #content li,
 #content li > a{
     display: table;
-    width:100%;    
+    width:100%;
 }
 
 #content li{
     border-bottom: 1px solid #e3e3e3;
 }
 
-#content li > span,
-#content li > p,
-#content li > a > span,
-#content li > a > p{
-    display: table-cell;
+#content li .cell{
+	display: table-cell;
     vertical-align: middle;
 }
 
@@ -356,7 +353,3 @@ nav .menu_disable{
 .stage_later ~ span{ 
     visibility:hidden;
 }
-
-   
-
-

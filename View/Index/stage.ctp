@@ -1,6 +1,6 @@
 <header>
 	<div class="wrapper">
-		<a href="#/ranking" class="icon-trophy" title="Classement général"></a>
+		<a href="#/ranking" class="icon-trophy" title="Classement gï¿½nï¿½ral"></a>
 		<h1>[SS16] Vodafone Rally de Portugal</h1>
 		<div id="check_refresh">
 			<input id="refresh" type="checkbox" checked="true" />
@@ -22,78 +22,15 @@
 <div id="content" class="page_rally">
 	<ol class="wrapper">
 		<li>
-			<span>1</span>
-			<span>S.OGIER</span>	
+			<span class="cell">1</span>
+			<span class="cell">S.OGIER</span>	
 		</li>
 		
 		<li>
-			<span>12</span>
-			<span>M. HIRVONEN</span>
-			<span>
+			<span class="cell">12</span>
+			<span class="cell">M. HIRVONEN</span>
+			<span class="cell">
 				<p>+15:04.25</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-				
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-				<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-		
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
-				<p>+53.2</p>
-			</span>		
-		</li>
-				
-		<li>
-			<span>2</span>
-			<span>M. HIRVONEN</span>
-			<span>
-				<p>+52.2</p>
 				<p>+53.2</p>
 			</span>		
 		</li>
