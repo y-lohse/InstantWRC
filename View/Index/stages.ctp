@@ -22,121 +22,52 @@
 
 <div id="content" class="page_stages">
 	<ol class="wrapper">
-            	<li>
-                    <a href="#/stage/1">
-                        <span class="stage_running">
-                            <span class="icon-play"></span>
-                            <p>Running</p>
-                        </span>
-			<p>
-                            SS6 Santana da Serra 1
-                            <span>31.12km</span>  
-                        </p>
-                       <span class="icon-play"></span>
-                    </a>
-		</li>
-                
-                <li>
-                    <a href="#/stage/1">
-                        <span class="stage_running">
-                            <span class="icon-play"></span>
-                            <p>Running</p>
-                        </span>
-			<p>
-                            SS6 Santana da Serra 1
-                            <span>31.12km</span>  
-                        </p>
-                       <span class="icon-play"></span>
-                    </a>
-		</li>
-                
-                <li>
-                    <a href="#/stage/1">
-                        <span class="stage_running">
-                            <span class="icon-play"></span>
-                            <p>Running</p>
-                        </span>
-			<p>
-                            SS6 Santana da Serra 1
-                            <span>31.12km</span>  
-                        </p>
-                       <span class="icon-play"></span>
-                    </a>
-		</li>         
-               
 		<li>
-                    <a href="#/stage/1">
-                        <span class="stage_finished">
-                            <span class="icon-trophy"></span>
-                            <p>Finished</p>
-                        </span>
+			<a href="#/stage/1">
+				<span class="stage_running">
+					<span class="icon-play"></span>
+					<p>Running</p>
+				</span>
+				<p>
+					SS6 Santana da Serra 1
+					<span>31.12km</span>  
+				</p>
+				<span class="icon-play"></span>
+			</a>
+		</li> 
+		<li>
+			<a href="#/stage/1">
+				<span class="stage_finished">
+					<span class="icon-trophy"></span>
+					<p>Finished</p>
+				</span>
+				<p>
+					SS6 Santana da Serra 1
+					<span>31.12km</span>  
+				</p>
+				<span class="icon-play"></span>
+			</a>
+		</li>
+		<li>
+			<span class="stage_later">
+				<span class="icon-clock"></span>
+				<p>08:25 <span>am</span></p>
+			</span>
 			<p>
-                            SS6 Santana da Serra 1
-                            <span>31.12km</span>  
-                        </p>
-                       <span class="icon-play"></span>
-                    </a>
+				SS6 Santana da Serra 1
+				<span>31.12km</span>  
+			</p>
 		</li>
-                
-                <li>
-                    <a href="#/stage/1">
-                        <span class="stage_finished">
-                            <span class="icon-trophy"></span>
-                            <p>Finished</p>
-                        </span>
+		<li>
+			<span class="stage_canceled">
+				<span class="icon-x"></span>
+				<p>Canceled</p>
+			</span>
 			<p>
-                            SS6 Santana da Serra 1
-                            <span>31.12km</span>  
-                        </p>
-                       <span class="icon-play"></span>
-                    </a>
-		</li>
-                                
-                <li>
-                    <a href="#/stage/1">
-                        <span class="stage_finished">
-                            <span class="icon-trophy"></span>
-                            <p>Finished</p>
-                        </span>
-			<p>
-                            SS6 Santana da Serra 1
-                            <span>31.12km</span>  
-                        </p>
-                       <span class="icon-play"></span>
-                    </a>
-		</li>
-              
-              
-              
-                <li>
-                    <span class="stage_later">
-                        <span class="icon-clock"></span>
-                        <p>08:25 <span>am</span></p>
-                    </span>
-                    <p>
-                        SS6 Santana da Serra 1
-                        <span>31.12km</span>  
-                    </p>
-
-		</li>
-                
-                <li>
-                    <span class="stage_canceled">
-                        <span class="icon-x"></span>
-                        <p>Canceled</p>
-                    </span>
-                    <p>
-                        SS6 Santana da Serra 1
-                        <span>31.12km</span>  
-                    </p>
-                    <span class="icon-play"></span>
-                </li>
-
-
-                
-                                            
-		
-		
-	
+				SS6 Santana da Serra 1
+				<span>31.12km</span>  
+			</p>
+			<span class="icon-play"></span>
+		</li>	
 	</ol>	
 </div>	<!--#content-->
