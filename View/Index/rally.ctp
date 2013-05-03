@@ -21,6 +21,9 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
+		<li ng-show="showStage" class="after_new_stage">
+			After {{ stagename }}
+		</li>
 		<li ng-repeat="time in times" class="table">
 			<span class="cell">
 				{{ time.rank }}
@@ -33,11 +36,9 @@
 				<p class="small-text">+{{ time.previous }}</p>
 			</span>	
 		</li>
-		<li class="after_new_stage">
-			After SS6 Santana da Serra 1 (running)
-		</li>
-		<li class="before_new_stage">
-			Before SS6 Santana da Serra 1 (running)
+		
+		<li ng-show="showStage" class="before_new_stage">
+			Before {{ stagename }}
 		</li>
 	</ol>	
 </div>	<!--#content-->
