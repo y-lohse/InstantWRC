@@ -4,7 +4,7 @@ class RallyController extends AppController {
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
-		//$this->RequestHandler->renderAs($this, 'json');
+		$this->RequestHandler->renderAs($this, 'json');
 	}
 	
 	public function running(){
@@ -31,7 +31,6 @@ class RallyController extends AppController {
 									 'retired'=>(bool)$time['Overall']['retired'],
 									 'last_stage'=>$time[0]['last_stage_id']));
 		}
-		$times[0]['last_stage'] = 8;
 		
 		usort($times, array($this, 'sortTimes'));
 		
