@@ -29,8 +29,10 @@
 				{{ time.driver }}
 			</span>
 			<span class="cell last-col" ng-hide="time.rank == 1 || time.retired">
-				<p>+{{ time.best }}</p>
-				<p class="small-text">+{{ time.previous }}</p>
+				<p>{{ time.best }}</p>
+				<p class="small-text">
+					{{ time.previous }}
+				</p>
 			</span>	
 		</li>
 	</ol>	

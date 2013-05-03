@@ -20,16 +20,18 @@ class WrcTime{
 		$hourconversion = (60*60*10);//une heure en dizieme de secondes
 		$minuteconversion = (60*10);
 		
-		//debug($timestamp);
 		$heures = floor($timestamp / $hourconversion);
 		$minutes = floor(($timestamp % $hourconversion) / $minuteconversion);
 		$secs = floor(($timestamp % $hourconversion) % $minuteconversion / 10);
 		$reste = ($timestamp % $hourconversion) % $minuteconversion % 10;
 		
 		$str = '';
-		if ($heures > 0) $str .= $heures.':';
-		if ($minutes > 0) $str .= $minutes.':';
-		$str .= $secs.'.'.$reste;
+		if ($heures > 0) $str .= abs($heures).':';
+		if ($minutes > 0) $str .= abs($minutes).':';
+		$str .= abs($secs).'.'.abs($reste);
+		
+		//symbole
+		$str = ($timestamp < 0) ? '-'.$str : '+'.$str;
 		
 		return $str;
 	}
