@@ -31,6 +31,7 @@ class RallyController extends AppController {
 									 'retired'=>(bool)$time['Overall']['retired'],
 									 'last_stage'=>$time[0]['last_stage_id']));
 		}
+		$times[0]['last_stage'] = 8;
 		
 		usort($times, array($this, 'sortTimes'));
 		
@@ -47,7 +48,7 @@ class RallyController extends AppController {
 		
 		//récupération du nom de la dernire spéciale
 		$stage = $this->Stage->findByStageId($times[0]['last_stage']);
-	
+		
 		$this->set('times', $times);
 		$this->set('stagename', $stage['Stage']['stage_name']);
 		$this->set('_serialize', array('times', 'stagename'));
@@ -58,6 +59,11 @@ class RallyController extends AppController {
 		//comapraison par élmination
 		if ($a['retired'] != $b['retired']){
 			return ($a['retired']) ? 1 : -1;
+		}
+		
+		//par derniere spéciale terminée
+		if ($a['last_stage'] != $b['last_stage']){
+			return ($a['last_stage'] < $b['last_stage']) ? 1 : -1;
 		}
 		
 		//comparaison au temps

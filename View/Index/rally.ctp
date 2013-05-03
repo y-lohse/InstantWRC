@@ -24,7 +24,7 @@
 		<li ng-show="showStage" class="after_new_stage">
 			After {{ stagename }}
 		</li>
-		<li ng-repeat="time in times" class="table">
+		<li ng-repeat="time in times | filter:{last_stage: firstStage}" class="table">
 			<span class="cell">
 				{{ time.rank }}
 			</span>
@@ -32,13 +32,25 @@
 				{{ time.driver }}
 			</span>
 			<span class="cell last-col" ng-hide="time.rank == 1 || time.retired">
-				<p>+{{ time.best }}</p>
-				<p class="small-text">+{{ time.previous }}</p>
+				<p>{{ time.best }}</p>
+				<p class="small-text">{{ time.previous }}</p>
 			</span>	
 		</li>
 		
 		<li ng-show="showStage" class="before_new_stage">
 			Before {{ stagename }}
+		</li>
+		<li ng-show="showStage" ng-repeat="time in times | filter:{last_stage: '!'+firstStage}" class="table">
+			<span class="cell">
+				{{ time.rank }}
+			</span>
+			<span class="cell">
+				{{ time.driver }}
+			</span>
+			<span class="cell last-col" ng-hide="time.rank == 1 || time.retired">
+				<p>{{ time.best }}</p>
+				<p class="small-text">+{{ time.previous }}</p>
+			</span>	
 		</li>
 	</ol>	
 </div>	<!--#content-->
