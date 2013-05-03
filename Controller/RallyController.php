@@ -4,7 +4,7 @@ class RallyController extends AppController {
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
-		$this->RequestHandler->renderAs($this, 'json');
+		//$this->RequestHandler->renderAs($this, 'json');
 	}
 	
 	public function running(){
@@ -44,9 +44,13 @@ class RallyController extends AppController {
 			$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
 			$previous = $time['timestamp'];
 		}
+		
+		//récupération du nom de la dernire spéciale
+		$stage = $this->Stage->findByStageId($times[0]['last_stage']);
 	
 		$this->set('times', $times);
-		$this->set('_serialize', array('times'));
+		$this->set('stagename', $stage['Stage']['stage_name']);
+		$this->set('_serialize', array('times', 'stagename'));
 	}
 	
 	//classement des pilotes par différents critères
