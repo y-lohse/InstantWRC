@@ -14,7 +14,7 @@ class UpdateController extends AppController {
 		App::import('Vendor', 'WrcDotCom');
 		$wrcInterface = new WrcDotCom($running['Rally']['url']);
 		
-		//création ou mAJ de la liste des spéciales
+		//création ou MAJ de la liste des spéciales
 		$this->initStages($rally_id, $wrcInterface);
 		
 		//@TODO : récupérer lesspéciales par ordre de passage
@@ -34,7 +34,7 @@ class UpdateController extends AppController {
 					$this->update($rally_id, $stage['Stage']['stage_id'], $stage['Stage']['stage_order'], $wrcInterface);
 				}
 				else if ($count > 0){
-					//la spéciale est terminé,e on a déja des temps
+					//la spéciale est terminée, on a déja des temps
 					//c'est le moment de détecter das abandons
 					
 					//on recupere la derniere spéciale a s'etre terminée
@@ -68,7 +68,7 @@ class UpdateController extends AppController {
 			}
 		}
 		
-		exit();
+		exit('end of script');
 	}
 	
 	private function initStages($rally_id, $wrcInterface){
