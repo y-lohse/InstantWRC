@@ -21,14 +21,16 @@ class StageController extends AppController {
 			));
 		}
 	
-		usort($times, array($this, 'sortTimes'));
-		$best = $previous = $times[0]['timestamp'];
-		
-		foreach ($times as $index=>&$time){
-			$time['rank'] = $index+1;
-			$time['best'] = WrcTime::toTimestring($time['timestamp'] - $best);
-			$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
-			$previous = $time['timestamp'];
+		if (count($times) > 0){
+			usort($times, array($this, 'sortTimes'));
+			$best = $previous = $times[0]['timestamp'];
+			
+			foreach ($times as $index=>&$time){
+				$time['rank'] = $index+1;
+				$time['best'] = WrcTime::toTimestring($time['timestamp'] - $best);
+				$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
+				$previous = $time['timestamp'];
+			}	
 		}
 		
 		$this->set('times', $times);
