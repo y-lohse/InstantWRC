@@ -3,39 +3,38 @@ angular.module('directives', [])
 	return function(scope, iElement, iAttrs){
 		var initOffset = 15,
 			refreshOffset = parseInt($window.getComputedStyle(iElement[0]).height),
-			refreshOnRelease = false,
+			refreshOnRelease,
+			touchStart;
+		iElement.css({overflow: 'hidden'});
+		
+		var init = function(){
+			iElement.css({height: 0});
 			touchStart = 0;
-		iElement.css({height: 0, overflow: 'hidden'});
+			refreshOnRelease = false;
+		}
+		
+		init();
 		
 		$document.bind('touchstart', function(e){
 			touchStart = e.touches[0].pageY;
 		});
 		$document.bind('touchend', function(e){
 			if (refreshOnRelease) alert('reload');
-			shutDown();
+			init();
 		});
 		
 		$document.bind('touchmove', function(e){
+			if ($window.pageYOffset > 0) return;
 			var dif = e.touches[0].pageY - touchStart;
-			var scrollTop = $window.pageYOffset;
-			var offset = dif - initOffset;
 			
-			if (scrollTop == 0 && dif > 0) e.preventDefault();
-			if (scrollTop == 0 && dif > initOffset) refresh(offset);
+			if (dif > 0) e.preventDefault();
+			if (dif > initOffset) refresh(dif - initOffset);
 		});
 		
 		var refresh = function(offset){
 			refreshOnRelease = (offset >= refreshOffset) ? true : false;
 			
-			offset = Math.min(offset, refreshOffset);
-			iElement.css({'height': offset+'px'});
-			iElement.html(offset);
-		}
-		
-		var shutDown = function(){
-			iElement.css({height: 0});
-			touchStart = 0;
-			refreshOnRelease = false;
+			iElement.css({'height': Math.min(offset, refreshOffset)+'px'});
 		}
 	}
 });
