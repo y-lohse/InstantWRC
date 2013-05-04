@@ -3,6 +3,7 @@ angular.module('directives', [])
 	return function(scope, iElement, iAttrs){
 		var initOffset = 15,
 			refreshOffset = parseInt($window.getComputedStyle(iElement[0]).height),
+			refreshFn = iAttrs.pullToRefresh,
 			refreshOnRelease,
 			touchStart;
 		iElement.css({overflow: 'hidden'});
@@ -19,7 +20,7 @@ angular.module('directives', [])
 			touchStart = e.touches[0].pageY;
 		});
 		$document.bind('touchend', function(e){
-			if (refreshOnRelease) alert('reload');
+			if (refreshOnRelease) scope[refreshFn]();
 			init();
 		});
 		
