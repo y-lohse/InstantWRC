@@ -19,7 +19,11 @@
 	</div>
 </nav>
 
-<div id="content" class="page_rally" data-pull>
+<div pull-to-refresh>
+	refreshing
+</div>
+
+<div id="content" class="page_rally">
 	<ol class="wrapper">
 		<li ng-show="showStage" class="after_new_stage">
 			After {{ Rally.lastStageName }}
