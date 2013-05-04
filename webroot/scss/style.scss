@@ -45,7 +45,7 @@ table {
 }
 
 /************/
-/* Général  */
+/* GÃ©nÃ©ral  */
 /***********/
 
 $header-color:#242529;
@@ -124,7 +124,7 @@ p{
 }
 
 /***************************/
-/* Mise en page générale  */
+/* Mise en page gÃ©nÃ©rale  */
 /**************************/
 
 .wrapper{
@@ -172,13 +172,16 @@ label[for="refresh"]{
     color:#c02436;
 }
 
-.icon-trophy, .icon-loop-alt2{
-    color:#c6cabd;
-    text-shadow: 2px 2px 1px rgba(0,0,0,0.16);
-    text-decoration: none;
-    font-size: 1.5em;
-    padding:10px;
+header{
+    .icon-trophy, .icon-loop-alt2{
+        color:#c6cabd;
+        text-shadow: 2px 2px 1px rgba(0,0,0,0.16);
+        text-decoration: none;
+        font-size: 1.5em;
+        padding:10px;
+    }
 }
+
 
 .icon-trophy, #check_refresh{
     width:40px;
@@ -235,46 +238,89 @@ nav .menu_disable{
     cursor: default;
 }
 
-/***************/
-/* Page Rally */
-/*************/
+/*********************************/
+/* Page Rally = tableau basique*/
+/*******************************/
 
-.page_rally li{
-    border-bottom: 1px solid #e3e3e3;
+#content .table{
     display: table;
-    width:100%;    
+    width:100%;
 }
 
-.page_rally li > span{
-    display: table-cell;
+#content li{
+    border-bottom: 1px solid #e3e3e3;
+}
+
+#content li .cell{
+	display: table-cell;
     vertical-align: middle;
-}
-
-.page_rally li > span:first-child{
-    display: table-cell;
-    background-color:#ccd1d4;
-    font-size: 1.8em;
+	padding-left:20px;
     color:#56636c;
-    padding:0.4em;
-    width: 50px;
-    text-align: center;
+
+	&:first-child{
+		padding-left:0;
+		background-color:#ccd1d4;
+    	color:#56636c;
+    	text-align: center;
+	}
 }
 
-.page_rally li > span + span{
-    padding-left:20px;
-    color:#56636c;
-}
-
-.page_rally li > span + span + span{
+#content .last-col{
     width: 100px;
     text-align: center;
     padding: 0 5px 0 15px;
 }
 
-.page_rally li span p + p{
+#content .small-text{
     font-size: 0.7em;
 }
 
+/* Page rally */
+#content.page_rally .cell:first-child{
+    font-size: 1.8em;
+    padding:0.4em;
+    width: 50px;
+}
 
+.before_new_stage,
+.after_new_stage{
+    background-color:#8a959a;
+    text-align: center;
+    padding:0.6em 0.4em;
+    color:#eff3f6;
+}
 
+/* Page stages */
 
+.page_stages a{
+    text-decoration: none;
+    color:inherit;
+}
+
+.page_stages .stage-status{
+    font-size: 0.8em;
+    width: 60px;
+    padding:1.1em 0.2em;
+    text-align: center;
+}
+
+.page_stages .stage-status{
+    .icon-trophy,
+    .icon-play,
+    .icon-clock,
+    .icon-x{
+        color:#56636c;
+        font-size: 1.4em;
+        display: block;
+        padding-bottom: 4px;
+        margin: 0 auto;
+    }
+}
+
+.page_stages .small-text,{
+    display:block;
+}
+
+.page_stages .last-col{
+	width: 40px;
+}

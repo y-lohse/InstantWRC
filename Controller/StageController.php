@@ -1,6 +1,6 @@
 <?php
 class StageController extends AppController {
-	public $uses = array('StageTime');
+	public $uses = array('Stage', 'StageTime');
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
@@ -21,18 +21,24 @@ class StageController extends AppController {
 			));
 		}
 	
-		usort($times, array($this, 'sortTimes'));
-		$best = $previous = $times[0]['timestamp'];
-		
-		foreach ($times as $index=>&$time){
-			$time['rank'] = $index+1;
-			$time['best'] = WrcTime::toTimestring($time['timestamp'] - $best);
-			$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
-			$previous = $time['timestamp'];
+		if (count($times) > 0){
+			usort($times, array($this, 'sortTimes'));
+			$best = $previous = $times[0]['timestamp'];
+			
+			foreach ($times as $index=>&$time){
+				$time['rank'] = $index+1;
+				$time['best'] = WrcTime::toTimestring($time['timestamp'] - $best);
+				$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
+				$previous = $time['timestamp'];
+			}	
 		}
 		
+		//nom de la spéciale
+		$stage = $this->Stage->findByStageId($stage_id);
+		
 		$this->set('times', $times);
-		$this->set('_serialize', array('times'));
+		$this->set('stagename', $stage['Stage']['stage_name']);
+		$this->set('_serialize', array('times', 'stagename'));
 	}
 	
 	//classement des pilotes par chrono

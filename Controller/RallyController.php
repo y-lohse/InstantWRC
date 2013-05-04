@@ -4,7 +4,7 @@ class RallyController extends AppController {
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
-		//$this->RequestHandler->renderAs($this, 'json');
+		$this->RequestHandler->renderAs($this, 'json');
 	}
 	
 	public function running(){
@@ -44,9 +44,13 @@ class RallyController extends AppController {
 			$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
 			$previous = $time['timestamp'];
 		}
-	
+		
+		//récupération du nom de la dernire spéciale
+		$stage = $this->Stage->findByStageId($times[0]['last_stage']);
+		
 		$this->set('times', $times);
-		$this->set('_serialize', array('times'));
+		$this->set('stagename', $stage['Stage']['stage_name']);
+		$this->set('_serialize', array('times', 'stagename'));
 	}
 	
 	//classement des pilotes par différents critères
@@ -54,6 +58,11 @@ class RallyController extends AppController {
 		//comapraison par élmination
 		if ($a['retired'] != $b['retired']){
 			return ($a['retired']) ? 1 : -1;
+		}
+		
+		//par derniere spéciale terminée
+		if ($a['last_stage'] != $b['last_stage']){
+			return ($a['last_stage'] < $b['last_stage']) ? 1 : -1;
 		}
 		
 		//comparaison au temps
