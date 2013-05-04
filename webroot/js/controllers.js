@@ -1,14 +1,13 @@
 InstantWRC.controller('RankingController', function(){
 });
-counter = 0;
+
 InstantWRC.controller('RallyController', function($scope, $http, Rally){
 	$scope.showStage = false;
 	$scope.firstStage = '';
 	
 	$scope.fetchData = function(){
-		counter++;
 		Rally.get({rallyId: $scope.rally_id}, function(data){
-			$scope.times = data.times.slice(0, counter);
+			$scope.times = data.times;
 			$scope.stagename = data.stagename;
 			
 			//plusieurs spéciales concurentes?
