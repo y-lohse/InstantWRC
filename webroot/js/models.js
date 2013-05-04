@@ -4,8 +4,8 @@ factory('Rally', function(RallyBackend, $q){
 		id: undefined,
 		name: undefined,
 		lastStageName: undefined,
-		times: [],
-		refreshData: function(){
+		times: undefined,
+		refreshRally: function(){
 			var deferred = $q.defer();
 			
 			RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
@@ -18,19 +18,26 @@ factory('Rally', function(RallyBackend, $q){
 			return deferred.promise;
 		},
 		getTimes: function(success){
-			if (this.times.length === 0){
-				this.refreshData().then(angular.bind(this, function(){
-					success(this.times);
-				}));
+			if (angular.isDefined(this.times)){
+				success(this.times);
 			}
 			else{
-				success(this.times);
+				var self = angular.bind(this, arguments.callee);
+				this.refreshRally().then(angular.bind(this, function(){
+					self(success);
+				}));
 			}
 		},
 		getStageName: function(success){
-			this.refreshData().then(function(){
+			if (angular.isDefined(this.lastStageName)){
 				success(this.lastStageName);
-			});
+			}
+			else {
+				var self = angular.bind(this, arguments.callee);
+				this.refreshRally().then(angular.bind(this, function(){
+					self(success);
+				}));
+			}
 		}
 	};
 });
