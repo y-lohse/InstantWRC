@@ -30,8 +30,8 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 
 InstantWRC.controller('StagesController', function($scope, $http, Rally){
 	$scope.fetchData = function(){
-		Rally.stages({rallyId: $scope.rally_id}, function(data){
-			$scope.stages = data.stages;
+		Rally.getStages(function(stages){
+			$scope.stages = stages;
 		});
 	};
 	
