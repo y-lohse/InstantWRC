@@ -1,10 +1,18 @@
 InstantWRC.controller('RankingController', function(){
 });
 
-InstantWRC.controller('RallyController', function($scope, $http){
-	$http.get('/rally/'+$scope.rally_id+'.json').success(function(data){
+InstantWRC.controller('RallyController', function($scope, $http, Rally){
+	$scope.times = [];
+	$scope.showStage = false;
+	$scope.firstStage = '';
+	
+	Rally.get({rallyId: $scope.rally_id}, function(data){
 		$scope.times = data.times;
-		$scope.stagename = data.stagename;
+	});
+	
+	/*$http.get('/rally/'+$scope.rally_id+'.json').success(function(data){
+		$scope.times = data.times;
+		//$scope.stagename = data.stagename;
 
 		$scope.showStage = false;
 		$scope.firstStage = $scope.times[0].last_stage;
@@ -14,7 +22,7 @@ InstantWRC.controller('RallyController', function($scope, $http){
 				break;
 			}
 		}
-	});
+	});*/
 });
 
 InstantWRC.controller('StagesController', function($scope, $http){
