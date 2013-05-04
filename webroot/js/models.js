@@ -5,23 +5,27 @@ factory('Rally', function(RallyBackend, $q){
 		name: undefined,
 		lastStageName: undefined,
 		times: [],
-		
 		refreshData: function(){
 			var deferred = $q.defer();
 			
-			RallyBackend.get({rallyId: this.id}, function(data){
+			RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
 				this.times = data.times;
 				this.lastStageName = data.stagename;
 				
 				deferred.resolve();
-			});
+			}));
 			
 			return deferred.promise;
 		},
 		getTimes: function(success){
-			this.refreshData().then(function(){
+			if (this.times.length === 0){
+				this.refreshData().then(angular.bind(this, function(){
+					success(this.times);
+				}));
+			}
+			else{
 				success(this.times);
-			});
+			}
 		},
 		getStageName: function(success){
 			this.refreshData().then(function(){

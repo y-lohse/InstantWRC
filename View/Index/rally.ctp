@@ -4,7 +4,7 @@
 		<h1>{{ rally_name }}</h1>
 		<div id="check_refresh">
 			<input id="refresh" type="checkbox" checked="true" />
-			<label for="refresh"><span aria-hidden="true" class="icon-loop-alt2"></span></label>
+			<label for="refresh" ng-click="fetchData()"><span aria-hidden="true" class="icon-loop-alt2"></span></label>
 		</div>
 	</div>
 </header>
