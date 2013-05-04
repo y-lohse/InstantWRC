@@ -9,7 +9,7 @@ InstantWRC.controller('RallyController', function($scope, $http){
 		$scope.showStage = false;
 		$scope.firstStage = $scope.times[0].last_stage;
 		for (var i = 1, l = $scope.times.length; i < l; i++){
-			if ($scope.times[i].last_stage != $scope.firstStage){
+			if (!$scope.times[i].retired && $scope.times[i].last_stage != $scope.firstStage){
 				$scope.showStage = true;
 				break;
 			}
