@@ -2,19 +2,14 @@ InstantWRC.controller('RankingController', function(){
 });
 
 InstantWRC.controller('RallyController', function($scope, $http, Rally){
-	$scope.times = [];
 	$scope.showStage = false;
 	$scope.firstStage = '';
 	
 	Rally.get({rallyId: $scope.rally_id}, function(data){
 		$scope.times = data.times;
-	});
-	
-	/*$http.get('/rally/'+$scope.rally_id+'.json').success(function(data){
-		$scope.times = data.times;
-		//$scope.stagename = data.stagename;
-
-		$scope.showStage = false;
+		$scope.stagename = data.stagename;
+		
+		//plusieurs spéciales concurentes?
 		$scope.firstStage = $scope.times[0].last_stage;
 		for (var i = 1, l = $scope.times.length; i < l; i++){
 			if (!$scope.times[i].retired && $scope.times[i].last_stage != $scope.firstStage){
@@ -22,17 +17,17 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 				break;
 			}
 		}
-	});*/
+	});
 });
 
-InstantWRC.controller('StagesController', function($scope, $http){
-	$http.get('/rally/stages/'+$scope.rally_id+'.json').success(function(data){
+InstantWRC.controller('StagesController', function($scope, $http, Rally){
+	Rally.stages({rallyId: $scope.rally_id}, function(data){
 		$scope.stages = data.stages;
 	});
 });
 
-InstantWRC.controller('StageController', function($scope, $http, $routeParams){
-	$http.get('/stage/'+$routeParams.stageId+'.json').success(function(data){
+InstantWRC.controller('StageController', function($scope, $http, $routeParams, Stage){
+	Stage.get({stageId: $routeParams.stageId}, function(data){
 		$scope.times = data.times;
 		$scope.stagename = data.stagename;
 	});

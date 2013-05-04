@@ -1,4 +1,4 @@
-var InstantWRC = angular.module('InstantWRC', ['directives', 'RallyService']);
+var InstantWRC = angular.module('InstantWRC', ['directives', 'WrcService']);
 InstantWRC.run(function($http, $location, $rootScope){
 	var requiredPath = $location.path();
 	

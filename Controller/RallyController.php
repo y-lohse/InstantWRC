@@ -46,10 +46,10 @@ class RallyController extends AppController {
 		}
 		
 		//récupération du nom de la dernire spéciale
-		//$stage = $this->Stage->findByStageId($times[0]['last_stage']);
+		$stage = $this->Stage->findByStageId($times[0]['last_stage']);
 		
 		$this->set('times', $times);
-		//$this->set('stagename', $stage['Stage']['stage_name']);
+		$this->set('stagename', $stage['Stage']['stage_name']);
 		$this->set('_serialize', array('times'));
 	}
 	
