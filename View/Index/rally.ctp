@@ -19,7 +19,7 @@
 	</div>
 </nav>
 
-<div pull-to-refresh style="height: 150px;">
+<div pull-to-refresh="refreshData" style="height: 150px;">
 	refreshing
 </div>
 
