@@ -1,12 +1,12 @@
-angular.module('WrcService', ['ngResource']).
-factory('Rally', function($resource){
+angular.module('InstantWrcBackend', ['ngResource']).
+factory('RallyBackend', function($resource){
 	return $resource(
 		'/rally/:rallyId.json',
 		{},
 		{'stages': {method: 'GET', url: '/rally/stages/:rallyId.json'}}
 	);
 }).
-factory('Stage', function($resource){
+factory('StageBackend', function($resource){
 	return $resource(
 		'/stage/:stageId.json'
 	);

@@ -6,17 +6,21 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 	$scope.firstStage = '';
 	
 	$scope.fetchData = function(){
-		Rally.get({rallyId: $scope.rally_id}, function(data){
-			$scope.times = data.times;
-			$scope.stagename = data.stagename;
+		Rally.getTimes(function(times){
+			$scope.times = times;
 			
-			//plusieurs spéciales concurentes?
 			$scope.firstStage = $scope.times[0].last_stage;
 			for (var i = 1, l = $scope.times.length; i < l; i++){
 				if (!$scope.times[i].retired && $scope.times[i].last_stage != $scope.firstStage){
 					$scope.showStage = true;
 					break;
 				}
+			}
+			
+			if ($scope.showStage){
+				Rally.getStageName(function(stageName){
+					$scope.stagename = stageName;
+				});
 			}
 		});
 	};
