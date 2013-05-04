@@ -15,10 +15,6 @@ InstantWRC.controller('RallyController', function($scope, $http){
 			}
 		}
 	});
-	
-	$scope.refreshData = function(){
-		alert('refreshing');
-	}
 });
 
 InstantWRC.controller('StagesController', function($scope, $http){
