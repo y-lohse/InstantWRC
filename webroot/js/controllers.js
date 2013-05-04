@@ -26,5 +26,6 @@ InstantWRC.controller('StagesController', function($scope, $http){
 InstantWRC.controller('StageController', function($scope, $http, $routeParams){
 	$http.get('/stage/'+$routeParams.stageId+'.json').success(function(data){
 		$scope.times = data.times;
+		$scope.stagename = data.stagename;
 	});
 });

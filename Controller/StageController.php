@@ -1,6 +1,6 @@
 <?php
 class StageController extends AppController {
-	public $uses = array('StageTime');
+	public $uses = array('Stage', 'StageTime');
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
@@ -33,8 +33,12 @@ class StageController extends AppController {
 			}	
 		}
 		
+		//nom de la spéciale
+		$stage = $this->Stage->findByStageId($stage_id);
+		
 		$this->set('times', $times);
-		$this->set('_serialize', array('times'));
+		$this->set('stagename', $stage['Stage']['stage_name']);
+		$this->set('_serialize', array('times', 'stagename'));
 	}
 	
 	//classement des pilotes par chrono
