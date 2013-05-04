@@ -5,8 +5,7 @@ angular.module('directives', [])
 		var initOffset = 15,
 			refreshOffset = 100,
 			refreshOnRelease = false,
-			touchStart = 0,
-			prevOffset = 0;
+			touchStart = 0;
 		
 		$document.bind('touchstart', function(e){
 			touchStart = e.touches[0].pageY;
@@ -22,11 +21,10 @@ angular.module('directives', [])
 			var offset = dif - initOffset;
 			
 			if (scrollTop == 0 && dif > 0) e.preventDefault();
-			if (scrollTop == 0 && dif > initOffset && prevOffset != offset) refresh(offset);
+			if (scrollTop == 0 && dif > initOffset) refresh(offset);
 		});
 		
 		var refresh = function(offset){
-			prevOffset = offset;
 			refreshOnRelease = (offset >= refreshOffset) ? true : false;
 			
 			offset = Math.min(offset, refreshOffset);
@@ -36,7 +34,7 @@ angular.module('directives', [])
 		
 		var shutDown = function(){
 			iElement.css({height: 0});
-			touchStart = prevOffset = 0;
+			touchStart = 0;
 			refreshOnRelease = false;
 		}
 	}
