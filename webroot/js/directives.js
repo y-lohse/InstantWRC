@@ -1,11 +1,11 @@
 angular.module('directives', [])
 .directive('pullToRefresh', function($document, $window){
 	return function(scope, iElement, iAttrs){
-		iElement.css({'height': 0, 'overflow': 'hidden'});
 		var initOffset = 15,
-			refreshOffset = 100,
+			refreshOffset = parseInt($window.getComputedStyle(iElement[0]).height),
 			refreshOnRelease = false,
 			touchStart = 0;
+		iElement.css({height: 0, overflow: 'hidden'});
 		
 		$document.bind('touchstart', function(e){
 			touchStart = e.touches[0].pageY;
