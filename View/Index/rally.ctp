@@ -19,10 +19,6 @@
 	</div>
 </nav>
 
-<div pull-to-refresh="refreshData" style="height: 150px;">
-	refreshing
-</div>
-
 <div id="content" class="page_rally">
 	<ol class="wrapper">
 		<li ng-show="showStage" class="after_new_stage">
