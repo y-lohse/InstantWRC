@@ -2,6 +2,20 @@
 class UpdateController extends AppController {
 	public $uses = array('Rally', 'Stage', 'Driver', 'Overall', 'StageTime');
 	
+	public function events(){
+		$this->autoRender = false;
+		header("Content-Type: text/event-stream; charset=utf-8");
+		header('Cache-Control: no-cache');
+		
+		while (true){
+			echo 'data: text';
+			echo "\n\n";
+			ob_flush();
+			flush();
+			sleep(2);
+		}
+	}
+	
 	//point d'entrée pour les MAJ
 	public function index(){
 		//on regarde si un rally est en cours

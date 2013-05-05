@@ -11,3 +11,16 @@ factory('StageBackend', function($resource){
 		'/stage/:stageId.json'
 	);
 });
+
+var source = new EventSource('/update/events');
+source.onmessage = function(){
+	console.log('msg');
+}
+source.addEventListener('open', function(e) {
+	  // Connection was opened.
+	//alert('open');
+	}, false);
+source.addEventListener('error', function(e) {
+	  // Connection was opened.
+	console.log('error');
+	}, false);
