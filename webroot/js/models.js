@@ -29,38 +29,6 @@ factory('Rally', function(RallyBackend, $q){
 			
 			return deferred.promise;
 		},
-		getTimes: function(success){
-			if (angular.isDefined(this.times)){
-				success(this.times);
-			}
-			else{
-				var self = angular.bind(this, arguments.callee);
-				this.refreshRally().then(angular.bind(this, function(){
-					self(success);
-				}));
-			}
-		},
-		getStageName: function(){
-			var deferred = $q.defer();
-			
-			if (angular.isDefined(this.lastStageName))
-				deferred.resolve(this.lastStageName);
-			else
-				this.refreshRally();
-			
-			return deferred.promise;
-		},
-		getStages: function(success){
-			if (angular.isDefined(this.stages)){
-				success(this.stages);
-			}
-			else {
-				var self = angular.bind(this, arguments.callee);
-				this.refreshStages().then(angular.bind(this, function(){
-					self(success);
-				}));
-			}
-		}
 	};
 }).
 factory('Stage', function(StageBackend, $q){
