@@ -40,16 +40,15 @@ factory('Rally', function(RallyBackend, $q){
 				}));
 			}
 		},
-		getStageName: function(success){
-			if (angular.isDefined(this.lastStageName)){
-				success(this.lastStageName);
-			}
-			else {
-				var self = angular.bind(this, arguments.callee);
-				this.refreshRally().then(angular.bind(this, function(){
-					self(success);
-				}));
-			}
+		getStageName: function(){
+			var deferred = $q.defer();
+			
+			if (angular.isDefined(this.lastStageName))
+				deferred.resolve(this.lastStageName);
+			else
+				this.refreshRally();
+			
+			return deferred.promise;
 		},
 		getStages: function(success){
 			if (angular.isDefined(this.stages)){

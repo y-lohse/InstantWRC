@@ -6,6 +6,17 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 	$scope.firstStage = '';
 	
 	$scope.fetchData = function(){
+		$scope.stagename = Rally.getStageName();
+		/*$scope.stagename = function(){
+			var deferred = $q.defer();
+			
+			Rally.getStageName(function(stageName){
+				deferred.resolve(stageName);
+			});
+			
+			return deferred.promise;
+		};*/
+		/*
 		Rally.getTimes(function(times){
 			$scope.times = times;
 			
@@ -22,7 +33,7 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 					$scope.stagename = stageName;
 				});
 			}
-		});
+		});*/
 	};
 	
 	$scope.fetchData();
