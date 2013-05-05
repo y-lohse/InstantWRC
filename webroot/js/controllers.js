@@ -33,14 +33,10 @@ InstantWRC.controller('StagesController', function($scope, $http, Rally){
 
 InstantWRC.controller('StageController', function($scope, $http, $routeParams, Stage){
 	Stage.id = $routeParams.stageId;
-	Stage.getStageName(function(stageName){
-		$scope.stagename = stageName;
-	});
+	$scope.Stage = Stage;
 	
 	$scope.fetchData = function(){
-		Stage.getTimes(function(times){
-			$scope.times = times;
-		});
+		Stage.refreshData();
 	};
 	
 	$scope.fetchData();

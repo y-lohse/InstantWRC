@@ -34,41 +34,19 @@ factory('Rally', function(RallyBackend, $q){
 factory('Stage', function(StageBackend, $q){
 	return {
 		id: undefined,
-		stageName: undefined,
+		name: undefined,
 		times: undefined,
 		refreshData: function(){
 			var deferred = $q.defer();
 			
 			StageBackend.get({stageId: this.id}, angular.bind(this, function(data){
 				this.times = data.times;
-				this.stageName = data.stagename;
+				this.name = data.stagename;
 				
 				deferred.resolve();
 			}));
 			
 			return deferred.promise;
-		},
-		getTimes: function(success){
-			if (angular.isDefined(this.times)){
-				success(this.times);
-			}
-			else {
-				var self = angular.bind(this, arguments.callee);
-				this.refreshData().then(angular.bind(this, function(){
-					self(success);
-				}));
-			}
-		},
-		getStageName: function(success){
-			if (angular.isDefined(this.stageName)){
-				success(this.stageName);
-			}
-			else {
-				var self = angular.bind(this, arguments.callee);
-				this.refreshData().then(angular.bind(this, function(){
-					self(success);
-				}));
-			}
 		},
 	};
 });
