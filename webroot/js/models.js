@@ -32,7 +32,7 @@ factory('Rally', function(RallyBackend, IWRCEventSource, $q){
 	};
 	
 	IWRCEventSource.subscribe('OverallUpdate', function(){
-		
+		console.log('notified');
 	});
 	
 	return Rally;

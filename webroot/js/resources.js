@@ -15,10 +15,29 @@ factory('StageBackend', function($resource){
 angular.module('InstantWrcSSE', []).
 provider('IWRCEventSource', function(){
 	this.source = new EventSource('/update/events');
-	this.events = [];
+	this.events = {};
 	
 	this.subscribe = function(event, callback){
-		alert('subscribing '+event);
+		if (angular.isDefined(this.events[event])){
+			console.log('event decalred');
+		}
+		else this.addEventListener(event, callback);
+	};
+	
+	this.addEventListener = function(event, callback){
+		this.source.addEventListener(event, angular.bind(this, this.dispatcher));
+		this.events[event] = [callback];
+	}
+	
+	this.dispatcher = function(e){
+		var eventName = e.type;
+		var data = angular.fromJson(e.data);
+		
+		if (angular.isDefined(this.events[eventName])){
+			for (var i = 0, l = this.events[eventName].length; i < l; i++){
+				this.events[eventName][i](data);
+			}
+		}
 	}
 	
 	this.$get = function(){
@@ -31,16 +50,3 @@ provider('IWRCEventSource', function(){
 		}
 	}
 });
-/*
-var source = new EventSource('/update/events');
-source.onmessage = function(){
-	console.log('msg');
-}
-source.addEventListener('open', function(e) {
-	  // Connection was opened.
-	//alert('open');
-	}, false);
-source.addEventListener('error', function(e) {
-	  // Connection was opened.
-	console.log('error');
-	}, false);*/

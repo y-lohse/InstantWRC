@@ -8,11 +8,12 @@ class UpdateController extends AppController {
 		header('Cache-Control: no-cache');
 		
 		while (true){
-			echo 'data: text';
-			echo "\n\n";
+			echo 'event: OverallUpdate'.PHP_EOL;
+			echo 'data: {"text": "lol"}'.PHP_EOL;
+			echo PHP_EOL;
 			ob_flush();
 			flush();
-			sleep(2);
+			sleep(5);
 		}
 	}
 	
