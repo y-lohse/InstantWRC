@@ -12,6 +12,26 @@ factory('StageBackend', function($resource){
 	);
 });
 
+angular.module('InstantWrcSSE', []).
+provider('IWRCEventSource', function(){
+	this.source = new EventSource('/update/events');
+	this.events = [];
+	
+	this.subscribe = function(event, callback){
+		alert('subscribing '+event);
+	}
+	
+	this.$get = function(){
+		var self = this;
+		
+		return {
+			subscribe: function(event, callback){
+				self.subscribe(event, callback);
+			}
+		}
+	}
+});
+/*
 var source = new EventSource('/update/events');
 source.onmessage = function(){
 	console.log('msg');
@@ -23,4 +43,4 @@ source.addEventListener('open', function(e) {
 source.addEventListener('error', function(e) {
 	  // Connection was opened.
 	console.log('error');
-	}, false);
+	}, false);*/

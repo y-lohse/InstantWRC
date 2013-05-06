@@ -1,6 +1,6 @@
-angular.module('Models', ['InstantWrcBackend']).
-factory('Rally', function(RallyBackend, $q){
-	return {
+angular.module('Models', ['InstantWrcBackend', 'InstantWrcSSE']).
+factory('Rally', function(RallyBackend, IWRCEventSource, $q){
+	var Rally = {
 		id: undefined,
 		name: undefined,
 		lastStageName: undefined,
@@ -30,6 +30,12 @@ factory('Rally', function(RallyBackend, $q){
 			return deferred.promise;
 		},
 	};
+	
+	IWRCEventSource.subscribe('OverallUpdate', function(){
+		
+	});
+	
+	return Rally;
 }).
 factory('Stage', function(StageBackend, $q){
 	return {
