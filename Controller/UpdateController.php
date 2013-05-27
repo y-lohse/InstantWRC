@@ -154,15 +154,16 @@ class UpdateController extends AppController {
 	private function update($rally_id, $stage_id, $stage_num, $wrcInterface){
 		$times = $wrcInterface->getStage($stage_num);
 		
-		$this->updateOverall($rally_id, $times['overall']);
-		$hasChanged = $this->updateStage($times['stage'], $stage_id);
+		//$this->updateOverall($rally_id, $times['overall']);
+		$hasChanged = $this->updateStage($times['stage'], $times['overall'], $stage_id);
 		
 		if ($hasChanged){
+			//misea jour du timestamp
 			$this->Stage->updateUpdate($stage_id);
 		}
 	}
 	
-	private function updateOverall($rally_id, $times){
+	/*private function updateOverall($rally_id, $times){
 		foreach ($times as $time){
 			//verifie si le piltoe exite déja dans la bdd
 			$exists = $this->Driver->findByDriverName($time['driver']);
@@ -186,20 +187,28 @@ class UpdateController extends AppController {
 				$this->Overall->updateOverall($driver_id, $rally_id, $time['time']);
 			}
 		}
-	}
+	}*/
 	
-	private function updateStage($times, $stage_id){
+	private function updateStage($stageTimes, $overallTimes, $stage_id){
 		$hasChanged = false;
 		
-		foreach ($times as $time){
-			$driver = $this->Driver->findByDriverName($time['driver']);
-			$driver_id = $driver['Driver']['driver_id'];
+		foreach ($stageTimes as $index=>$time){
+			//verifie si le piltoe exite déja dans la bdd
+			$exists = $this->Driver->findByDriverName($time['driver']);
+			if (count($exists) === 0){
+				//il faut créer le pilote
+				$driver = $this->Driver->registerDriver($time['driver']);
+				$driver_id = $driver['Driver']['driver_id'];
+			}
+			else {
+				$driver_id = $exists['Driver']['driver_id'];
+			}
 			
 			//verifie si on a déja enregistré le chrono de ce pilote/spéciale
 			$exists = $this->StageTime->isRegistered($driver_id, $stage_id);
 			if ($exists == 0){
 				//pas enregistré pour cette course, on le crée
-				$this->StageTime->registerTime($driver_id, $stage_id, $time['time']);
+				$this->StageTime->registerTime($driver_id, $stage_id, $time['time'], $overallTimes[$index]['time']);
 				$hasChanged = true;
 			}
 		}
