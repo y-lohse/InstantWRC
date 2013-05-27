@@ -72,6 +72,8 @@ class RallyController extends AppController {
 	public function stages($stage_id){
 		$stage_id = (int)$stage_id;
 		$stage = $this->Stage->findByStageId($stage_id);
+		
+		//récupération de la timezone
 		$rally_id = $stage['Stage']['fk_rally_id'];
 		$timezone = $this->Rally->getTimezone($rally_id);
 		
