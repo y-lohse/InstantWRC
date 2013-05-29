@@ -23,13 +23,15 @@ class RallyController extends AppController {
 		$rally_id = (int)$rally_id;
 		App::import('Vendor', 'WrcTime');
 		
-		$rawTimes = $this->Overall->getOverALlTimes($rally_id);
+		$rawTimes = $this->Rally->getOverAllTimes($rally_id);
+		
 		$times = array();
 		foreach ($rawTimes as $time){	
 			array_push($times, array('driver'=>$time['Driver']['name'],
-									 'timestamp'=>WrcTime::toTimestamp($time['Overall']['time']),
-									 'retired'=>(bool)$time['Overall']['retired'],
-									 'last_stage'=>$time[0]['last_stage_id']));
+									 'timestamp'=>WrcTime::toTimestamp($time['StageTime']['time']),
+									 //'retired'=>(bool)$time['Overall']['retired'],
+									 'retired'=>false,
+									 'last_stage'=>$time['MaxStage']['last_stage_id']));
 		}
 		
 		usort($times, array($this, 'sortTimes'));
