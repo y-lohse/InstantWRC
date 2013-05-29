@@ -155,7 +155,7 @@ class UpdateController extends AppController {
 		$times = $wrcInterface->getStage($stage_num);
 		
 		//$this->updateOverall($rally_id, $times['overall']);
-		$hasChanged = $this->updateStage($times['stage'], $times['overall'], $stage_id);
+		$hasChanged = $this->updateStage($times['stage'], $times['overall'], $rally_id, $stage_id);
 		
 		if ($hasChanged){
 			//misea jour du timestamp
@@ -189,7 +189,7 @@ class UpdateController extends AppController {
 		}
 	}*/
 	
-	private function updateStage($stageTimes, $overallTimes, $stage_id){
+	private function updateStage($stageTimes, $overallTimes, $rally_id, $stage_id){
 		$hasChanged = false;
 		
 		foreach ($stageTimes as $index=>$time){
@@ -208,6 +208,9 @@ class UpdateController extends AppController {
 			$exists = $this->StageTime->isRegistered($driver_id, $stage_id);
 			if ($exists == 0){
 				//pas enregistré pour cette course, on le crée
+				//dans l'overall pour commencer
+				$this->Overall->register($driver_id, $rally_id);
+				
 				//on recupere le temps total de ce pilote
 				$overall = '';
 				foreach ($overallTimes as $overallTime){

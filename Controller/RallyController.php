@@ -29,8 +29,7 @@ class RallyController extends AppController {
 		foreach ($rawTimes as $time){	
 			array_push($times, array('driver'=>$time['Driver']['name'],
 									 'timestamp'=>WrcTime::toTimestamp($time['StageTime']['time']),
-									 //'retired'=>(bool)$time['Overall']['retired'],
-									 'retired'=>false,
+									 'retired'=>(bool)$time['Overall']['retired'],
 									 'last_stage'=>$time['MaxStage']['last_stage_id']));
 		}
 		

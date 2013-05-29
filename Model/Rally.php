@@ -50,7 +50,7 @@ GROUP BY max_stage.fk_driver_id
         $fields = array('Driver.driver_name'=>'name',
 						'Driver.driver_id'=>'id',
 						'StageTime.stage_time_overall'=>'time',
-						//'Overall.overall_retired'=>'retired',
+						'Overall.overall_retired'=>'retired',
 						'MaxStage.stage_id'=>'last_stage_id');
 					
         //@TODO : faire la subquery en plus propre	
@@ -85,6 +85,14 @@ GROUP BY max_stage.fk_driver_id
 						'type'=>'LEFT',
 						'conditions'=>array(
 								'Driver.driver_id = StageTime.fk_driver_id'
+						)),
+				array(
+						'table'=>'overall',
+						'alias'=>'Overall',
+						'type'=>'LEFT',
+						'conditions'=>array(
+								'Overall.fk_driver_id = MaxStage.driver_id',
+								'Overall.fk_rally_id = '.$this->alias.'.'.$this->primaryKey
 						)),
 		);
     
