@@ -40,7 +40,7 @@
 		<li ng-show="showStage" class="before_new_stage">
 			Before {{ Rally.lastStageName }}
 		</li>
-		<li ng-show="showStage" ng-repeat="time in Rally.times | filter:{last_stage: '!'+firstStage}" class="table">
+		<li ng-show="showStage || showRetirements" ng-repeat="time in Rally.times | filter:{last_stage: '!'+firstStage}" class="table">
 			<span class="cell">
 				{{ time.rank }}
 			</span>

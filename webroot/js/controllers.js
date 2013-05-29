@@ -3,6 +3,7 @@ InstantWRC.controller('RankingController', function(){
 
 InstantWRC.controller('RallyController', function($scope, $http, Rally){
 	$scope.showStage = false;
+	$scope.showRetirements = false;
 	$scope.firstStage = '';
 	$scope.Rally = Rally;
 	
@@ -11,7 +12,13 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 			$scope.firstStage = Rally.times[0].last_stage;
 			for (var i = 1, l = Rally.times.length; i < l; i++){
 				if (Rally.times[i].last_stage != $scope.firstStage){
-					$scope.showStage = true;
+					if (Rally.times[i].retired){
+					   $scope.showStage = false;
+					   $scope.showRetirements = true;
+					}
+					else {
+					   $scope.showStage = true;
+                    }
 					break;
 				}
 			}
