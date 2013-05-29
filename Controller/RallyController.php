@@ -51,7 +51,7 @@ class RallyController extends AppController {
 		
 		$this->set('times', $times);
 		$this->set('stagename', $stage['Stage']['stage_name']);
-		$this->set('_serialize', array('times'));
+		$this->set('_serialize', array('times', 'stagename'));
 	}
 	
 	//classement des pilotes par différents critères
