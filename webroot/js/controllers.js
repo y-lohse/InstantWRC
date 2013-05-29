@@ -10,7 +10,7 @@ InstantWRC.controller('RallyController', function($scope, $http, Rally){
 		Rally.refreshRally().then(angular.bind(this, function(){
 			$scope.firstStage = Rally.times[0].last_stage;
 			for (var i = 1, l = Rally.times.length; i < l; i++){
-				if (!Rally.times[i].retired && Rally.times[i].last_stage != $scope.firstStage){
+				if (Rally.times[i].last_stage != $scope.firstStage){
 					$scope.showStage = true;
 					break;
 				}
