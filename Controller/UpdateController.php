@@ -208,7 +208,16 @@ class UpdateController extends AppController {
 			$exists = $this->StageTime->isRegistered($driver_id, $stage_id);
 			if ($exists == 0){
 				//pas enregistré pour cette course, on le crée
-				$this->StageTime->registerTime($driver_id, $stage_id, $time['time'], $overallTimes[$index]['time']);
+				//on recupere le temps total de ce pilote
+				$overall = '';
+				foreach ($overallTimes as $overallTime){
+				    if ($overallTime['driver'] === $time['driver']){
+				        $overall = $overallTime['time'];
+				        break;
+				    }
+				}
+				
+				$this->StageTime->registerTime($driver_id, $stage_id, $time['time'], $overall);
 				$hasChanged = true;
 			}
 		}
