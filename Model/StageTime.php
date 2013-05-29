@@ -40,5 +40,18 @@ class StageTime extends AppModel{
 						'conditions'=>$conditions);
 		return $this->find('all', $params);
 	}
+	
+	public function getDriverStageTime($driver_id, $stage_id){
+	   $fields = array('StageTime.stage_time_time'=>'time',
+	                   'StageTime.stage_time_overall'=>'overall');
+	
+		$conditions = array();
+		$conditions['StageTime.fk_stage_id'] = $stage_id;
+		$conditions['StageTime.fk_driver_id'] = $driver_id;
+	
+		$params = array('fields'=>$this->fieldsAs($fields),
+						'conditions'=>$conditions);
+		return $this->find('first', $params);
+	}
 }
 ?>

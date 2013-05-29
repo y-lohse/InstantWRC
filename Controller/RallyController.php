@@ -4,7 +4,7 @@ class RallyController extends AppController {
 	public $components = array('RequestHandler');
 	
 	public function beforeFilter(){
-		$this->RequestHandler->renderAs($this, 'json');
+		//$this->RequestHandler->renderAs($this, 'json');
 	}
 	
 	public function running(){
@@ -27,7 +27,8 @@ class RallyController extends AppController {
 		
 		$times = array();
 		foreach ($rawTimes as $time){	
-			array_push($times, array('driver'=>$time['Driver']['name'],
+			array_push($times, array('id'=>$time['Driver']['id'],
+									 'driver'=>$time['Driver']['name'],
 									 'timestamp'=>WrcTime::toTimestamp($time['StageTime']['time']),
 									 'retired'=>(bool)$time['Overall']['retired'],
 									 'last_stage'=>$time['MaxStage']['last_stage_id']));
@@ -36,13 +37,42 @@ class RallyController extends AppController {
 		usort($times, array($this, 'sortTimes'));
 		
 		$best = $previous = $times[0]['timestamp'];
+		$bestOverallPrevious = NULL;
 		
 		foreach ($times as $index=>&$time){
 			if ($time['retired']) continue;
 			
 			$time['rank'] = $index+1;
-			$time['best'] = WrcTime::toTimestring($time['timestamp'] - $best);
-			$time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
+			
+			if ($time['last_stage'] != $times[0]['last_stage'] && $times[0]['last_stage'] > 1){
+                //le premier a déja fait une autre spéciale
+                //difference par rapport au premier sur son temps AVANT la derniere spéciale
+                if ($bestOverallPrevious === NULL){
+                    $bestOverallPrevious = $this->StageTime->getDriverStageTime($times[0]['id'], $times[0]['last_stage']-1);
+                    $bestOverallPrevious = WrcTime::toTimestamp($bestOverallPrevious['StageTime']['overall']);
+                }
+                
+                $time['best'] = WrcTime::toTimestring($time['timestamp'] - $bestOverallPrevious);
+                
+                //différence avec le précédent par rapport a la derniere spéciale que self a faite
+                if ($time['last_stage'] != $times[$index-1]['last_stage'] && 
+                    $index > 1 &&
+                    $times[$index-1]['last_stage'] > 1){
+                    //le précédent a une spéciale d'avance aussi
+                    $prevOverallPrevious = $this->StageTime->getDriverStageTime($times[$index-1]['id'], $times[$index-1]['last_stage']-1);
+                    $prevOverallPrevious = WrcTime::toTimestamp($prevOverallPrevious['StageTime']['overall']);
+                    $time['previous'] = WrcTime::toTimestring($time['timestamp'] - $prevOverallPrevious);
+                }
+                else {
+                    $time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
+                }
+			}
+			else {
+                //difference classique par rapport au précédents
+                $time['best'] = WrcTime::toTimestring($time['timestamp'] - $best);
+                $time['previous'] = WrcTime::toTimestring($time['timestamp'] - $previous);
+            }
+			
 			$previous = $time['timestamp'];
 		}
 		
