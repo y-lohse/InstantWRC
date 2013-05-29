@@ -21,7 +21,7 @@
 
 <div id="content" class="page_rally">
 	<ol class="wrapper">
-		<li ng-show="Rally.showStage" class="after_new_stage">
+		<li ng-show="showStage" class="after_new_stage">
 			After {{ Rally.lastStageName }}
 		</li>
 		<li ng-repeat="time in Rally.times | filter:{last_stage: firstStage}" class="table">
@@ -37,8 +37,8 @@
 			</span>	
 		</li>
 		
-		<li ng-show="Rally.showStage" class="before_new_stage">
-			Before {{ stagename }}
+		<li ng-show="showStage" class="before_new_stage">
+			Before {{ Rally.lastStageName }}
 		</li>
 		<li ng-show="showStage" ng-repeat="time in Rally.times | filter:{last_stage: '!'+firstStage}" class="table">
 			<span class="cell">
