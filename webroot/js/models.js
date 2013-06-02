@@ -24,7 +24,7 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
 	    },
 	});
 	
-    var Rally = RallyModel.new({id: 5});
+    var Rally = RallyModel.new();
 	
 	Rally.refreshRally = function(){
         var deferred = $q.defer();

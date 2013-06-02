@@ -12,7 +12,9 @@ angular.module('DataBinder', [])
             
             instance.scope.instance = instance;
             
-            //for (var prop in defaultValues){}
+            for (var prop in defaultValues){
+                if (instance.hasOwnProperty(prop)) instance[prop] = defaultValues[prop];
+            }
             
             for (var prop in this.properties){
                 var ref = prop;
