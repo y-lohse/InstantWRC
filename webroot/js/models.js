@@ -3,9 +3,13 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
 	
 	var RallyModel = ModelAPI.create(['id', 'name', 'lastStageName', 'times', 'stages']);
 	
-    var Rally = RallyModel.new();
+    var rally = RallyModel.new();
+    
+    rally.watch('id', function(){
+        alert('changed');
+    });
 	
-	Rally.refreshRally = function(){
+	rally.refreshRally = function(){
         var deferred = $q.defer();
         
         RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
@@ -17,7 +21,8 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
         
         return deferred.promise;
     };
-    Rally.refreshStages = function(){
+    /*
+    rally.refreshStages = function(){
         var deferred = $q.defer();
         
         RallyBackend.stages({rallyId: this.id}, angular.bind(this, function(data){
@@ -27,9 +32,9 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
         }));
         
         return deferred.promise;
-    };
+    };*/
     
-	return Rally;
+	return rally;
 }).
 factory('Stage', function(StageBackend, $q){
 	return {
