@@ -1,5 +1,5 @@
-angular.module('Models', ['InstantWrcBackend', 'InstantWrcSSE']).
-factory('Rally', function(RallyBackend, IWRCEventSource, $q){
+angular.module('Models', ['InstantWrcBackend']).
+factory('Rally', function(RallyBackend, $q){
 	var Rally = {
 		id: undefined,
 		name: undefined,
@@ -31,9 +31,9 @@ factory('Rally', function(RallyBackend, IWRCEventSource, $q){
 		},
 	};
 	
-	IWRCEventSource.subscribe('OverallUpdate', function(){
+	/*IWRCEventSource.subscribe('OverallUpdate', function(){
 		console.log('notified');
-	});
+	});*/
 	
 	return Rally;
 }).
