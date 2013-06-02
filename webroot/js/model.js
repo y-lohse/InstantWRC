@@ -37,8 +37,11 @@ angular.module('DataBinder', [])
         create: function(properties){
             var model = Object.create(Model);
             
-            for (var prop in properties){
-                model.properties[prop] = properties[prop];
+            for (var i = 0, l = properties.length; i < l; i++){
+                model.properties[properties[i]] = {
+                   enumerable: true,
+                   writable: true,
+                };
             }
             
             return model;

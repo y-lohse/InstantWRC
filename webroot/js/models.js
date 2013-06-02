@@ -1,28 +1,7 @@
 angular.module('Models', ['InstantWrcBackend', 'DataBinder']).
 factory('Rally', function(RallyBackend, $q, ModelAPI){
 	
-	var RallyModel = ModelAPI.create({
-	    id: {
-	       enumerable: true,
-	       writable: true,
-	    },
-		name: {
-	       enumerable: true,
-	       writable: true,
-	    },
-		lastStageName: {
-	       enumerable: true,
-	       writable: true,
-	    },
-		times: {
-	       enumerable: true,
-	       writable: true,
-	    },
-		stages: {
-	       enumerable: true,
-	       writable: true,
-	    },
-	});
+	var RallyModel = ModelAPI.create(['id', 'name', 'lastStageName', 'times', 'stages']);
 	
     var Rally = RallyModel.new();
 	
@@ -30,8 +9,8 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
         var deferred = $q.defer();
         
         RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
-            //this.times = data.times;
-            //this.lastStageName = data.stagename;
+            this.times = data.times;
+            this.lastStageName = data.stagename;
             
             deferred.resolve();
         }));
@@ -42,7 +21,7 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
         var deferred = $q.defer();
         
         RallyBackend.stages({rallyId: this.id}, angular.bind(this, function(data){
-            //this.stages = data.stages;
+            this.stages = data.stages;
             
             deferred.resolve();
         }));
