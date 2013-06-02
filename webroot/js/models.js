@@ -5,15 +5,22 @@ factory('Rally', function(RallyBackend, $q, Model, LocalStorageService){
 	
     var rally = RallyModel.new();
     
-    rally.watch('id', function(newValue, oldValue){
+    //LocalStorageService.clear();
+    rally.watch('id', function(){
         //présence dans le local storage?
-        var stored = LocalStorageService.getItem('rally_'+newValue);
+        var stored = LocalStorageService.getItem('rally_'+rally.id);
         if (stored === null){
-            console.log('store local');
+            var values = rally.getValues();
+            LocalStorageService.setItem('rally_'+rally.id, values);
         }
         else{
-            console.log('load local');
+            rally.setValues(stored);
         }
+        
+        rally.watchAny(function(prop, newer, old){
+            var values = rally.getValues();
+            LocalStorageService.setItem('rally_'+rally.id, values);
+        });
     });
 	
 	rally.refreshRally = function(){

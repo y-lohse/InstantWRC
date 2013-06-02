@@ -55,10 +55,10 @@ angular.module('LocalStorage', [])
 .factory('LocalStorageService', function(){
     var ls = {
         getItem: function(key){
-            return window.localStorage.getItem(key);
+            return angular.fromJson(window.localStorage.getItem(key));
         },
         setItem: function(key, value){
-            return window.localStorage.setItem(key, value);
+            return window.localStorage.setItem(key, angular.toJson(value));
         },
         removeItem: function(key){
             return window.localStorage.removeItem(key);
