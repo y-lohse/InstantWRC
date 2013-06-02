@@ -3,7 +3,7 @@
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		InstantWRC
+		InstantWRC beta
 	</title>
 	<?php
 		echo $this->fetch('meta');

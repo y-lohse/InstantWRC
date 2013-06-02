@@ -2,6 +2,21 @@
 class UpdateController extends AppController {
 	public $uses = array('Rally', 'Stage', 'Driver', 'Overall', 'StageTime');
 	
+	public function events(){
+		$this->autoRender = false;
+		header("Content-Type: text/event-stream; charset=utf-8");
+		header('Cache-Control: no-cache');
+		
+		while (true){
+			echo 'event: OverallUpdate'.PHP_EOL;
+			echo 'data: {"text": "lol"}'.PHP_EOL;
+			echo PHP_EOL;
+			ob_flush();
+			flush();
+			sleep(5);
+		}
+	}
+	
 	//point d'entrée pour les MAJ
 	public function index(){
 		//on regarde si un rally est en cours
@@ -139,15 +154,16 @@ class UpdateController extends AppController {
 	private function update($rally_id, $stage_id, $stage_num, $wrcInterface){
 		$times = $wrcInterface->getStage($stage_num);
 		
-		$this->updateOverall($rally_id, $times['overall']);
-		$hasChanged = $this->updateStage($times['stage'], $stage_id);
+		//$this->updateOverall($rally_id, $times['overall']);
+		$hasChanged = $this->updateStage($times['stage'], $times['overall'], $rally_id, $stage_id);
 		
 		if ($hasChanged){
+			//misea jour du timestamp
 			$this->Stage->updateUpdate($stage_id);
 		}
 	}
 	
-	private function updateOverall($rally_id, $times){
+	/*private function updateOverall($rally_id, $times){
 		foreach ($times as $time){
 			//verifie si le piltoe exite déja dans la bdd
 			$exists = $this->Driver->findByDriverName($time['driver']);
@@ -171,20 +187,40 @@ class UpdateController extends AppController {
 				$this->Overall->updateOverall($driver_id, $rally_id, $time['time']);
 			}
 		}
-	}
+	}*/
 	
-	private function updateStage($times, $stage_id){
+	private function updateStage($stageTimes, $overallTimes, $rally_id, $stage_id){
 		$hasChanged = false;
 		
-		foreach ($times as $time){
-			$driver = $this->Driver->findByDriverName($time['driver']);
-			$driver_id = $driver['Driver']['driver_id'];
+		foreach ($stageTimes as $index=>$time){
+			//verifie si le piltoe exite déja dans la bdd
+			$exists = $this->Driver->findByDriverName($time['driver']);
+			if (count($exists) === 0){
+				//il faut créer le pilote
+				$driver = $this->Driver->registerDriver($time['driver']);
+				$driver_id = $driver['Driver']['driver_id'];
+			}
+			else {
+				$driver_id = $exists['Driver']['driver_id'];
+			}
 			
 			//verifie si on a déja enregistré le chrono de ce pilote/spéciale
 			$exists = $this->StageTime->isRegistered($driver_id, $stage_id);
 			if ($exists == 0){
 				//pas enregistré pour cette course, on le crée
-				$this->StageTime->registerTime($driver_id, $stage_id, $time['time']);
+				//dans l'overall pour commencer
+				$this->Overall->register($driver_id, $rally_id);
+				
+				//on recupere le temps total de ce pilote
+				$overall = '';
+				foreach ($overallTimes as $overallTime){
+				    if ($overallTime['driver'] === $time['driver']){
+				        $overall = $overallTime['time'];
+				        break;
+				    }
+				}
+				
+				$this->StageTime->registerTime($driver_id, $stage_id, $time['time'], $overall);
 				$hasChanged = true;
 			}
 		}

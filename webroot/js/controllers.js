@@ -1,31 +1,50 @@
 InstantWRC.controller('RankingController', function(){
 });
 
-InstantWRC.controller('RallyController', function($scope, $http){
-	$http.get('/rally/'+$scope.rally_id+'.json').success(function(data){
-		$scope.times = data.times;
-		$scope.stagename = data.stagename;
-
-		$scope.showStage = false;
-		$scope.firstStage = $scope.times[0].last_stage;
-		for (var i = 1, l = $scope.times.length; i < l; i++){
-			if (!$scope.times[i].retired && $scope.times[i].last_stage != $scope.firstStage){
-				$scope.showStage = true;
-				break;
+InstantWRC.controller('RallyController', function($scope, $http, Rally){
+	$scope.showStage = false;
+	$scope.showRetirements = false;
+	$scope.firstStage = '';
+	$scope.Rally = Rally;
+	
+	$scope.fetchData = function(){
+		Rally.refreshRally().then(angular.bind(this, function(){
+			$scope.firstStage = Rally.times[0].last_stage;
+			for (var i = 1, l = Rally.times.length; i < l; i++){
+				if (Rally.times[i].last_stage != $scope.firstStage){
+					if (Rally.times[i].retired){
+					   $scope.showStage = false;
+					   $scope.showRetirements = true;
+					}
+					else {
+					   $scope.showStage = true;
+                    }
+					break;
+				}
 			}
-		}
-	});
+		}));
+	};
+	
+	$scope.fetchData();
 });
 
-InstantWRC.controller('StagesController', function($scope, $http){
-	$http.get('/rally/stages/'+$scope.rally_id+'.json').success(function(data){
-		$scope.stages = data.stages;
-	});
+InstantWRC.controller('StagesController', function($scope, $http, Rally){
+	$scope.Rally = Rally;
+	
+	$scope.fetchData = function(){
+		Rally.refreshStages();
+	};
+	
+	$scope.fetchData();
 });
 
-InstantWRC.controller('StageController', function($scope, $http, $routeParams){
-	$http.get('/stage/'+$routeParams.stageId+'.json').success(function(data){
-		$scope.times = data.times;
-		$scope.stagename = data.stagename;
-	});
+InstantWRC.controller('StageController', function($scope, $http, $routeParams, Stage){
+	Stage.id = $routeParams.stageId;
+	$scope.Stage = Stage;
+	
+	$scope.fetchData = function(){
+		Stage.refreshData();
+	};
+	
+	$scope.fetchData();
 });
