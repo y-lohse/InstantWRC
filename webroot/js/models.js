@@ -1,12 +1,19 @@
-angular.module('Models', ['InstantWrcBackend', 'DataBinder']).
-factory('Rally', function(RallyBackend, $q, ModelAPI){
+angular.module('Models', ['InstantWrcBackend', 'DataBinder', 'LocalStorage']).
+factory('Rally', function(RallyBackend, $q, ModelAPI, LocalStorageService){
 	
 	var RallyModel = ModelAPI.create(['id', 'name', 'lastStageName', 'times', 'stages']);
 	
     var rally = RallyModel.new();
     
-    rally.watch('id', function(){
-        alert('changed');
+    rally.watch('id', function(newValue, oldValue){
+        //présence dans le local storage?
+        var stored = LocalStorageService.getItem('rally_'+newValue);
+        if (stored === null){
+            console.log('store local');
+        }
+        else{
+            console.log('load local');
+        }
     });
 	
 	rally.refreshRally = function(){
