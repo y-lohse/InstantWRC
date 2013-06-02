@@ -4,14 +4,27 @@ angular.module('DataBinder', [])
         scope: null,
         collection: [],
         properties: {},
-        new: function(properties){
-            properties = properties || {};
+        new: function(defaultValues){
+            defaultValues = defaultValues || {};
             
             var instance = Object.create(this.__proto__, this.properties);
-            /*instance.scope = $rootScope.$new();
+            instance.scope = $rootScope.$new();
             
-            this.collection.push(instance);*/
+            instance.scope.instance = instance;
+            
+            //for (var prop in defaultValues){}
+            
+            for (var prop in this.properties){
+                var ref = prop;
+                instance.scope.$watch('instance.'+prop, angular.bind(this, this.propertyChange, prop));
+            }
+            
+            this.collection.push(instance);
             return instance;
+        },
+        propertyChange:function(property, newValue, oldValue){
+            if (newValue === oldValue) return;//changed due to init
+            console.log(property+' changed from '+oldValue+' to '+newValue);
         }
     };
     

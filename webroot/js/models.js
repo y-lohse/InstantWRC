@@ -24,25 +24,25 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
 	    },
 	});
 	
-    var rally = RallyModel.new();
+    var Rally = RallyModel.new({id: 5});
 	
-	rally.refreshRally = function(){
+	Rally.refreshRally = function(){
         var deferred = $q.defer();
         
         RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
-            this.times = data.times;
-            this.lastStageName = data.stagename;
+            //this.times = data.times;
+            //this.lastStageName = data.stagename;
             
             deferred.resolve();
         }));
         
         return deferred.promise;
     };
-    rally.refreshStages = function(){
+    Rally.refreshStages = function(){
         var deferred = $q.defer();
         
         RallyBackend.stages({rallyId: this.id}, angular.bind(this, function(data){
-            this.stages = data.stages;
+            //this.stages = data.stages;
             
             deferred.resolve();
         }));
@@ -50,7 +50,7 @@ factory('Rally', function(RallyBackend, $q, ModelAPI){
         return deferred.promise;
     };
     
-	return rally;
+	return Rally;
 }).
 factory('Stage', function(StageBackend, $q){
 	return {
