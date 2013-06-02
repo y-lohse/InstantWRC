@@ -1,41 +1,56 @@
-angular.module('Models', ['InstantWrcBackend']).
-factory('Rally', function(RallyBackend, $q){
-	var Rally = {
-		id: undefined,
-		name: undefined,
-		lastStageName: undefined,
-		times: undefined,
-		stages: undefined,
-		refreshRally: function(){
-			var deferred = $q.defer();
-			
-			RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
-				this.times = data.times;
-				this.lastStageName = data.stagename;
-				
-				deferred.resolve();
-			}));
-			
-			return deferred.promise;
-		},
-		refreshStages: function(){
-			var deferred = $q.defer();
-			
-			RallyBackend.stages({rallyId: this.id}, angular.bind(this, function(data){
-				this.stages = data.stages;
-				
-				deferred.resolve();
-			}));
-			
-			return deferred.promise;
-		},
-	};
+angular.module('Models', ['InstantWrcBackend', 'DataBinder']).
+factory('Rally', function(RallyBackend, $q, ModelAPI){
 	
-	/*IWRCEventSource.subscribe('OverallUpdate', function(){
-		console.log('notified');
-	});*/
+	var RallyModel = ModelAPI.create({
+	    id: {
+	       enumerable: true,
+	       writable: true,
+	    },
+		name: {
+	       enumerable: true,
+	       writable: true,
+	    },
+		lastStageName: {
+	       enumerable: true,
+	       writable: true,
+	    },
+		times: {
+	       enumerable: true,
+	       writable: true,
+	    },
+		stages: {
+	       enumerable: true,
+	       writable: true,
+	    },
+	});
 	
-	return Rally;
+    var rally = RallyModel.new();
+	
+	rally.refreshRally = function(){
+        var deferred = $q.defer();
+        
+        RallyBackend.get({rallyId: this.id}, angular.bind(this, function(data){
+            this.times = data.times;
+            this.lastStageName = data.stagename;
+            
+            deferred.resolve();
+        }));
+        
+        return deferred.promise;
+    };
+    rally.refreshStages = function(){
+        var deferred = $q.defer();
+        
+        RallyBackend.stages({rallyId: this.id}, angular.bind(this, function(data){
+            this.stages = data.stages;
+            
+            deferred.resolve();
+        }));
+        
+        return deferred.promise;
+    };
+    
+	return rally;
 }).
 factory('Stage', function(StageBackend, $q){
 	return {
