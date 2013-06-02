@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-var InstantWRC = angular.module('InstantWRC', ['directives']);
-InstantWRC.run(function($http, $location, $rootScope){
-=======
 var InstantWRC = angular.module('InstantWRC', ['directives', 'Models']);
 InstantWRC.run(function($http, $location, $rootScope, Rally){
 	var requiredPath = $location.path();
 	
->>>>>>> origin/master
 	$http.get('/rally/running.json').success(function(data){
 		if (data.id){
 			Rally.id = data.id;
