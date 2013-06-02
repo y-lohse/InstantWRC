@@ -59,6 +59,12 @@ angular.module('LocalStorage', [])
         },
         setItem: function(key, value){
             return window.localStorage.setItem(key, value);
+        },
+        removeItem: function(key){
+            return window.localStorage.removeItem(key);
+        },
+        clear: function(){
+            return window.localStorage.clear();
         }
     };
     
