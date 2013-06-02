@@ -1,32 +1,9 @@
 angular.module('DataBinder', [])
 .factory('Model', function($rootScope){
-    var Model = {
+    //represent one instance of a given model
+    var ModelInstance = {
         scope: null,
-        collection: [],
         listeners: {},
-        properties: {},
-        //create a new instance of this model
-        new: function(defaultValues){
-            defaultValues = defaultValues || {};
-            
-            //@TODO : ne pasexposer le proto
-            var instance = Object.create(this.__proto__, this.properties);
-            instance.scope = $rootScope.$new();
-            
-            instance.scope.instance = instance;
-            
-            for (var prop in defaultValues){
-                if (instance.hasOwnProperty(prop)) instance[prop] = defaultValues[prop];
-            }
-            
-            for (var prop in this.properties){
-                instance.listeners[prop] = [];
-                instance.scope.$watch('instance.'+prop, angular.bind(this, this.propertyChange, prop));
-            }
-            
-            this.collection.push(instance);
-            return instance;
-        },
         //dispatcher function for property change
         propertyChange:function(property, newValue, oldValue){
             if (newValue === oldValue) return;//changed due to init
@@ -43,13 +20,13 @@ angular.module('DataBinder', [])
         //@TODO : unwatch
     };
     
-    return Model;
-})
-.factory('ModelAPI', function(Model){
-    var ModelAPI = {
-        //create a new model object
+    //creates new models and model instances
+    var Model = {
+        collection: [],
+        properties: {},
+        //create a new model type
         create: function(properties){
-            var model = Object.create(Model);
+            var model = Object.create(this);
             
             for (var i = 0, l = properties.length; i < l; i++){
                 model.properties[properties[i]] = {
@@ -59,8 +36,29 @@ angular.module('DataBinder', [])
             }
             
             return model;
-        }
+        },
+        //create a new instance of this model type
+        new: function(defaultValues){
+            defaultValues = defaultValues || {};
+            
+            var instance = Object.create(ModelInstance, this.properties);
+            instance.scope = $rootScope.$new();
+            
+            instance.scope.instance = instance;
+            
+            for (var prop in defaultValues){
+                if (instance.hasOwnProperty(prop)) instance[prop] = defaultValues[prop];
+            }
+            
+            for (var prop in this.properties){
+                instance.listeners[prop] = [];
+                instance.scope.$watch('instance.'+prop, angular.bind(instance, instance.propertyChange, prop));
+            }
+            
+            this.collection.push(instance);
+            return instance;
+        },
     };
     
-    return ModelAPI;
+    return Model;
 });

@@ -1,7 +1,7 @@
 angular.module('Models', ['InstantWrcBackend', 'DataBinder', 'LocalStorage']).
-factory('Rally', function(RallyBackend, $q, ModelAPI, LocalStorageService){
+factory('Rally', function(RallyBackend, $q, Model, LocalStorageService){
 	
-	var RallyModel = ModelAPI.create(['id', 'name', 'lastStageName', 'times', 'stages']);
+	var RallyModel = Model.create(['id', 'name', 'lastStageName', 'times', 'stages']);
 	
     var rally = RallyModel.new();
     
