@@ -91,7 +91,7 @@ p{
     line-height: 1.5em;
 }
 
-.icon-trophy, .icon-menu, .icon-loop-alt2, .icon-play, .icon-x, .icon-checkmark, .icon-clock {
+.icon-trophy, .icon-menu, .icon-loop-alt2, .icon-play, .icon-x, .icon-checkmark, .icon-clock, .icon-ico_ptr {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -121,6 +121,10 @@ p{
 }
 .icon-clock:before {
 	content: "\e004";
+}
+
+.icon-ico_ptr:before {
+	content: "\e007";
 }
 
 /***************************/
