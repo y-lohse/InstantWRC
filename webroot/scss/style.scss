@@ -238,6 +238,29 @@ nav .menu_disable{
     cursor: default;
 }
 
+/* Pull to refresh */
+
+.pull-to-refresh{
+  background-color:#edf1e7;
+   -webkit-box-shadow: inset 0 -4px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: inset 0 -4px 5px 0px rgba(0,0,0,0.2);
+}
+
+.pull-to-refresh p{
+    padding:20px 0 15px 20px;
+    color:#56636c;    
+   
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.pull-to-refresh span{ /*l'icone pull to refresh*/
+    font-size: 2em;
+    padding:15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /*********************************/
 /* Page Rally = tableau basique*/
 /*******************************/

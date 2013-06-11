@@ -19,8 +19,8 @@
 	</div>
 </nav>
 
-<div pull-to-refresh style="height: 100px;">
-    refreshing
+<div pull-to-refresh class="pull-to-refresh">
+    <p><span class="icon-ico_ptr"></span>Pull to refresh...</p>
 </div>
 
 <div id="content" class="page_rally">
