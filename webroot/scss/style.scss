@@ -1,3 +1,5 @@
+@import "compass";
+
 /* RESET */
 
 html, body, div, span, applet, object, iframe,
@@ -263,6 +265,10 @@ nav .menu_disable{
     padding:15px;
     display: inline-block;
     vertical-align: middle;
+    @include transition(transform .5s ease-in);
+}
+.pull-to-refresh.ready span{
+    @include rotate(180deg);
 }
 
 /*********************************/
