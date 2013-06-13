@@ -3,7 +3,7 @@
 		<a href="#/ranking" class="icon-trophy" title="Classement général"></a>
 		<h1>{{ Rally.name }}</h1>
 		<div id="check_refresh">
-			<input id="refresh" type="checkbox" checked="true" />
+			<input id="refresh" type="checkbox" ng-disabled="true" />
 			<label for="refresh" ng-click="fetchData()"><span aria-hidden="true" class="icon-loop-alt2"></span></label>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 	</div>
 </nav>
 
-<div pull-to-refresh class="pull-to-refresh">
+<div pull-to-refresh="fetchData" class="pull-to-refresh">
     <p><span class="icon-ico_ptr"></span>Pull to refresh...</p>
 </div>
 

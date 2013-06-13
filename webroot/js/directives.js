@@ -36,6 +36,7 @@ angular.module('directives', [])
 			refreshOnRelease = (offset >= refreshOffset) ? true : false;
 			
 			iElement.css({'height': Math.min(offset, refreshOffset)+'px'});
+			(refreshOnRelease) ? iElement.addClass('ready') : iElement.removeClass('ready');
 		}
 	}
 });
